@@ -5263,2524 +5263,3095 @@ _renderExtSheet(content, sheetId) {
 
 //////////Permiter
 _renderPermitSheet(content, sheetId) {
-  console.log('rendersheet', content.title)
+    console.log('rendersheet', content.title)
+    
+    if (content.title == 'Exterior Doorway') {
+        return (
   
-  if (content.title == 'Exterior Doorway') {
-      return (
-
-          <View keyboardDismissMode="on-drag">
-              <Grid style={{ marginTop: 0 }}>
-                <Col>
-                      <Button block error style={{ marginTop: 10 }}
-                          onPress={() =>
-                              ActionSheet.show(
-                                  {
-                                      options: SIDES,
-                                      cancelButtonIndex: SIDES.length - 1,
-                                      title: "Select Side"
-                                  },
-                                  buttonIndex => {
-                                      if (buttonIndex != SIDES.length - 1) {
-                                          content.side = SIDES[buttonIndex]
-                                      } else {
-                                          content.side = '';
-                                      }
-                                      this.setState({})
-                                  }
-                              )}>
-                          <Text>{content.side || 'Side'}</Text>
-                      </Button>
-                  </Col>
+            <View keyboardDismissMode="on-drag">
+                <Grid style={{ marginTop: 0 }}>
                   <Col>
-                      <Button block error style={{ marginTop: 10 }}
-                          onPress={() =>
-                              ActionSheet.show(
-                                  {
-                                      options: EXTTYPES1,
-                                      cancelButtonIndex: EXTTYPES1.length - 1,
-                                      title: "Select Side"
-                                  },
-                                  buttonIndex => {
-                                      if (buttonIndex != EXTTYPES1.length - 1) {
-                                          content.doorType = EXTTYPES1[buttonIndex]
-                                      } else {
-                                          content.doorType = '';
-                                      }
-                                      this.setState({})
-                                  }
-                              )}>
-                          <Text>{content.doorType || 'Type'}</Text>
-                      </Button>
-                  </Col>
-              </Grid>
-
-              <Grid style={{ marginTop: 10 }}>
-                  <Col style={{ height: 200 }}>
-                      <Text>Door</Text>
-                      
-                      <Button
-                          onPress={() =>
-                              ActionSheet.show(
-                                  {
-                                      options: PermSub1,
-                                      cancelButtonIndex: 3,
-                                      title: content.door.M || "Select Material"
-                                  },
-                                  buttonIndex => {
-                                      if (buttonIndex != PermSub1.length - 1) {
-                                          content.door.M = PermSub1[buttonIndex]
-                                          content.frame.M = PermSub1[buttonIndex]
-                                          content.thresh.M = PermSub1[buttonIndex]
-                                          content.securitydoor.M = PermSub1[buttonIndex]
-                                          content.screendoor.M = PermSub1[buttonIndex]
-                                          this.setState({})
-                                      }
-                                  }
-                              )}
-                      >
-                          <Text>{content.door.M || "Material"}</Text>
-                      </Button>
-                      <Text >{content.door.I == true ? 'Intact' : 'Deteriorated'}</Text>
-                      <ListItem>
-                          <RkChoice rkType='posNeg' selected={content.door.I} onChange={(e) => {
-                              content.door.I = !content.door.I
-                              this.setState({})
-                          }} />
-                      </ListItem>
-                      <Item>
-                          <Input keyboardType="numeric" placeholder="Reading" maxLength={4} value={content.door.R} onChangeText={(text) => {
-                              let p = text.split('.').join('');
-                              content.door.R = String((Math.round(p) / 10).toFixed(1));
-                              this.setState({})
-                          }} />
-                      </Item>
-                  </Col>
-
-                  <Col style={{ height: 200 }}>
-                      <Text>Door Frame</Text>
-                      <Button
-                          onPress={() =>
-                              ActionSheet.show(
-                                  {
-                                      options: PermSub1,
-                                      cancelButtonIndex: PermSub1.length - 1,
-                                      title: content.frame.M || "Select Material"
-                                  },
-                                  buttonIndex => {
-                                      if (buttonIndex != PermSub1.length - 1) {
-                                          content.frame.M = PermSub1[buttonIndex]
-                                          this.setState({})
-                                      }
-                                  }
-                              )}
-                      >
-                          <Text>{content.frame.M || "Material"}</Text>
-                      </Button>
-                      <Text >{content.frame.I == true ? 'Intact' : 'Deteriorated'}</Text>
-                      <ListItem>
-                          <RkChoice rkType='posNeg' selected={content.frame.I} onChange={(e) => {
-                              content.frame.I = !content.frame.I
-                              this.setState({})
-                          }} />
-                      </ListItem>
-                      <Item>
-                          <Input keyboardType="numeric" placeholder="Reading" maxLength={4} value={content.frame.R} onChangeText={(text) => {
-                              let p = text.split('.').join('');
-                              content.frame.R = String((Math.round(p) / 10).toFixed(1));
-                              this.setState({})
-                          }} />
-                      </Item>
-                  </Col>
-
-                  <Col style={{ height: 200 }}>
-                      <Text>Threshold</Text>
-                      <Button
-                          onPress={() =>
-                              ActionSheet.show(
-                                  {
-                                      options: PermSub1,
-                                      cancelButtonIndex: PermSub1.length - 1,
-                                      title: content.thresh.M || "Select Material"
-                                  },
-                                  buttonIndex => {
-                                      if (buttonIndex != PermSub1.length - 1) {
-                                          content.thresh.M = PermSub1[buttonIndex]
-                                          this.setState({})
-                                      }
-                                  }
-                              )}
-                      >
-                          <Text>{content.thresh.M || "Material"}</Text>
-                      </Button>
-                      <Text >{content.thresh.I == true ? 'Intact' : 'Deteriorated'}</Text>
-                      <ListItem>
-                          <RkChoice rkType='posNeg' selected={content.thresh.I} onChange={(e) => {
-                              content.thresh.I = !content.thresh.I
-                              this.setState({})
-                          }} />
-                      </ListItem>
-                      <Item>
-                          <Input keyboardType="numeric" placeholder="Reading" maxLength={4} value={content.thresh.R} onChangeText={(text) => {
-                              let p = text.split('.').join('');
-                              content.thresh.R = String((Math.round(p) / 10).toFixed(1));
-                              this.setState({})
-                          }} />
-                      </Item>
-                  </Col>
-              </Grid>
-              <Grid style={{ marginTop: 10 }}>
-                  <Col style={{ height: 200 }}>
-                      <Text>Security Door</Text>
-                      <Button
-                          onPress={() =>
-                              ActionSheet.show(
-                                  {
-                                      options: PermSub1,
-                                      cancelButtonIndex: PermSub1.length - 1,
-                                      title: content.securitydoor.M || "Select Material"
-                                  },
-                                  buttonIndex => {
-                                      if (buttonIndex != PermSub1.length - 1) {
-                                          content.securitydoor.M = PermSub1[buttonIndex]
-                                          this.setState({})
-                                      }
-                                  }
-                              )}
-                      >
-                          <Text>{content.securitydoor.M || "Material"}</Text>
-                      </Button>
-                      <Text >{content.securitydoor.I == true ? 'Intact' : 'Deteriorated'}</Text>
-                      <ListItem>
-                          <RkChoice rkType='posNeg' selected={content.securitydoor.I} onChange={(e) => {
-                              content.securitydoor.I = !content.securitydoor.I
-                              this.setState({})
-                          }} />
-                      </ListItem>
-                      <Item>
-                          <Input keyboardType="numeric" placeholder="Reading" maxLength={4} value={content.securitydoor.R} onChangeText={(text) => {
-                              let p = text.split('.').join('');
-                              content.securitydoor.R = String((Math.round(p) / 10).toFixed(1));
-                              this.setState({})
-                          }} />
-                      </Item>
-                  </Col>
-                  <Col style={{ height: 200 }}>
-                      <Text>Screen Door</Text>
-                      <Button
-                          onPress={() =>
-                              ActionSheet.show(
-                                  {
-                                      options: PermSub1,
-                                      cancelButtonIndex: PermSub1.length - 1,
-                                      title: content.screendoor.M || "Select Material"
-                                  },
-                                  buttonIndex => {
-                                      if (buttonIndex != PermSub1.length - 1) {
-                                          content.screendoor.M = PermSub1[buttonIndex]
-                                          this.setState({})
-                                      }
-                                  }
-                              )}
-                      >
-                          <Text>{content.screendoor.M || "Material"}</Text>
-                      </Button>
-                      <Text >{content.screendoor.I == true ? 'Intact' : 'Deteriorated'}</Text>
-                      <ListItem>
-                          <RkChoice rkType='posNeg' selected={content.screendoor.I} onChange={(e) => {
-                              content.screendoor.I = !content.screendoor.I
-                              this.setState({})
-                          }} />
-                      </ListItem>
-                      <Item>
-                          <Input keyboardType="numeric" placeholder="Reading" maxLength={4} value={content.screendoor.R} onChangeText={(text) => {
-                              let p = text.split('.').join('');
-                              content.screendoor.R = String((Math.round(p) / 10).toFixed(1));
-                              this.setState({})
-                          }} />
-                      </Item>
-                  </Col>
-              </Grid>
-              <Item stackedLabel>
-                  <Label>Comments</Label>
-                  <Input value={content.comments} onChangeText={(text) => { content.comments = text; this.setState({}) }} />
-              </Item>
-              {this.renderExteriorHtmlFooter(sheetId, content)}
-          </View>
-
-      );
-  }
-  /** exterior windows */
-  if (content.title == 'Exterior Windows') {
-      return (
-          <View keyboardDismissMode="on-drag">
-              <Grid style={{ marginTop: 0 }}>
-                <Col>
-                      <Button block error style={{ marginTop: 10 }}
-                          onPress={() =>
-                              ActionSheet.show(
-                                  {
-                                      options: SIDES,
-                                      cancelButtonIndex: SIDES.length - 1,
-                                      title: "Select Side"
-                                  },
-                                  buttonIndex => {
-                                      if (buttonIndex != SIDES.length - 1) {
-                                          content.side = SIDES[buttonIndex]
-                                      } else {
-                                          content.side = '';
-                                      }
-                                      this.setState({})
-                                  }
-                              )}>
-                          <Text>{content.side || 'Side'}</Text>
-                      </Button>
-                  </Col>
-
-                  <Col>
-                      <Button block error style={{ marginTop: 10 }}
-                          onPress={() =>
-                              ActionSheet.show(
-                                  {
-                                      options: EXTTYPES2,
-                                      cancelButtonIndex: EXTTYPES2.length - 1,
-                                      title: "Select Side"
-                                  },
-                                  buttonIndex => {
-                                      if (buttonIndex != EXTTYPES2.length - 1) {
-                                          content.doorType = EXTTYPES2[buttonIndex]
-                                      } else {
-                                          content.doorType = '';
-                                      }
-                                      this.setState({})
-                                  }
-                              )}>
-                          <Text>{content.doorType || 'Type'}</Text>
-                      </Button>
-                  </Col>
-              </Grid>
-
-              <Grid style={{ marginTop: 10 }}>
-                  <Col style={{ height: 200 }}>
-                      <Text>Window Well</Text>
-                      <Button
-                          onPress={() =>
-                              ActionSheet.show(
-                                  {
-                                      options: PermSub2,
-                                      cancelButtonIndex: PermSub2.length - 1,
-                                      title: content.well.M || "Select Material"
-                                  },
-                                  buttonIndex => {
-                                      if (buttonIndex != PermSub2.length - 1) {
-                                          content.well.M = PermSub2[buttonIndex]
-                                          content.sash.M = PermSub2[buttonIndex]
-                                          content.frame.M = PermSub2[buttonIndex]
-                                          content.shutters.M = PermSub2[buttonIndex]
-                                          content.securitybars.M = PermSub2[buttonIndex]
-                                          content.awning.M = PermSub2[buttonIndex]
-                                          content.windowScreen.M = PermSub2[buttonIndex]
-                                          this.setState({})
-                                      }
-                                  }
-                              )}
-                      >
-                          <Text>{content.well.M || "Material"}</Text>
-                      </Button>
-                      <Text >{content.well.I == true ? 'Intact' : 'Deteriorated'}</Text>
-                      <ListItem>
-                          <RkChoice rkType='posNeg' selected={content.well.I} onChange={(e) => {
-                              content.well.I = !content.well.I
-                              this.setState({})
-                          }} />
-                      </ListItem>
-                      <Item>
-                          <Input keyboardType="numeric" placeholder="Reading" maxLength={4} value={content.well.R} onChangeText={(text) => {
-                              let p = text.split('.').join('');
-                              content.well.R = String((Math.round(p) / 10).toFixed(1));
-                              this.setState({})
-                          }} />
-                      </Item>
-                  </Col>
-
-                  <Col style={{ height: 200 }}>
-                      <Text>Window Sash</Text>
-                      <Button
-                          onPress={() =>
-                              ActionSheet.show(
-                                  {
-                                      options: PermSub2,
-                                      cancelButtonIndex: PermSub2.length - 1,
-                                      title: content.sash.M || "Select Material"
-                                  },
-                                  buttonIndex => {
-                                      if (buttonIndex != PermSub2.length - 1) {
-                                          content.sash.M = PermSub2[buttonIndex]
-                                          this.setState({})
-                                      }
-                                  }
-                              )}
-                      >
-                          <Text>{content.sash.M || "Material"}</Text>
-                      </Button>
-                      <Text >{content.sash.I == true ? 'Intact' : 'Deteriorated'}</Text>
-                      <ListItem>
-                          <RkChoice rkType='posNeg' selected={content.sash.I} onChange={(e) => {
-                              content.sash.I = !content.sash.I
-                              this.setState({})
-                          }} />
-                      </ListItem>
-                      <Item>
-                          <Input keyboardType="numeric" placeholder="Reading" maxLength={4} value={content.sash.R} onChangeText={(text) => {
-                              let p = text.split('.').join('');
-                              content.sash.R = String((Math.round(p) / 10).toFixed(1));
-                              this.setState({})
-                          }} />
-                      </Item>
-                  </Col>
-                  <Col style={{ height: 200 }}>
-                      <Text>Window Frame</Text>
-                      <Button
-                          onPress={() =>
-                              ActionSheet.show(
-                                  {
-                                      options: PermSub2,
-                                      cancelButtonIndex: PermSub2.length - 1,
-                                      title: content.frame.M || "Select Material"
-                                  },
-                                  buttonIndex => {
-                                      if (buttonIndex != PermSub2.length - 1) {
-                                          content.frame.M = PermSub2[buttonIndex]
-                                          this.setState({})
-                                      }
-                                  }
-                              )}
-                      >
-                          <Text>{content.frame.M || "Material"}</Text>
-                      </Button>
-                      <Text >{content.frame.I == true ? 'Intact' : 'Deteriorated'}</Text>
-                      <ListItem>
-                          <RkChoice rkType='posNeg' selected={content.frame.I} onChange={(e) => {
-                              content.frame.I = !content.frame.I
-                              this.setState({})
-                          }} />
-                      </ListItem>
-                      <Item>
-                          <Input keyboardType="numeric" placeholder="Reading" maxLength={4} value={content.frame.R} onChangeText={(text) => {
-                              let p = text.split('.').join('');
-                              content.frame.R = String((Math.round(p) / 10).toFixed(1));
-                              this.setState({})
-                          }} />
-                      </Item>
-                  </Col>
-              </Grid>
-
-              <Grid style={{ marginTop: 10 }}>
-                  <Col style={{ height: 200 }}>
-                      <Text>Shutters</Text>
-                      <Button
-                          onPress={() =>
-                              ActionSheet.show(
-                                  {
-                                      options: PermSub2,
-                                      cancelButtonIndex: PermSub2.length - 1,
-                                      title: content.shutters.M || "Select Material"
-                                  },
-                                  buttonIndex => {
-                                      if (buttonIndex != PermSub2.length - 1) {
-                                          content.shutters.M = PermSub2[buttonIndex]
-                                          this.setState({})
-                                      }
-                                  }
-                              )}
-                      >
-                          <Text>{content.shutters.M || "Material"}</Text>
-                      </Button>
-                      <Text >{content.shutters.I == true ? 'Intact' : 'Deteriorated'}</Text>
-                      <ListItem>
-                          <RkChoice rkType='posNeg' selected={content.shutters.I} onChange={(e) => {
-                              content.shutters.I = !content.shutters.I
-                              this.setState({})
-                          }} />
-                      </ListItem>
-                      <Item>
-                          <Input keyboardType="numeric" placeholder="Reading" maxLength={4} value={content.shutters.R} onChangeText={(text) => {
-                              let p = text.split('.').join('');
-                              content.shutters.R = String((Math.round(p) / 10).toFixed(1));
-                              this.setState({})
-                          }} />
-                      </Item>
-                  </Col>
-                  <Col style={{ height: 200 }}>
-                      <Text>Security Bars</Text>
-                      <Button
-                          onPress={() =>
-                              ActionSheet.show(
-                                  {
-                                      options: PermSub2,
-                                      cancelButtonIndex: PermSub2.length - 1,
-                                      title: content.securitybars.M || "Select Material"
-                                  },
-                                  buttonIndex => {
-                                      if (buttonIndex != PermSub2.length - 1) {
-                                          content.securitybars.M = PermSub2[buttonIndex]
-                                          this.setState({})
-                                      }
-                                  }
-                              )}
-                      >
-                          <Text>{content.securitybars.M || "Material"}</Text>
-                      </Button>
-                      <Text >{content.securitybars.I == true ? 'Intact' : 'Deteriorated'}</Text>
-                      <ListItem>
-                          <RkChoice rkType='posNeg' selected={content.securitybars.I} onChange={(e) => {
-                              content.securitybars.I = !content.securitybars.I
-                              this.setState({})
-                          }} />
-                      </ListItem>
-                      <Item>
-                          <Input keyboardType="numeric" placeholder="Reading" maxLength={4} value={content.securitybars.R} onChangeText={(text) => {
-                              let p = text.split('.').join('');
-                              content.securitybars.R = String((Math.round(p) / 10).toFixed(1));
-                              this.setState({})
-                          }} />
-                      </Item>
-                  </Col>
-                  <Col style={{ height: 200 }}>
-                      <Text>Awning</Text>
-                      <Button
-                          onPress={() =>
-                              ActionSheet.show(
-                                  {
-                                      options: PermSub2,
-                                      cancelButtonIndex: PermSub2.length - 1,
-                                      title: content.awning.M || "Select Material"
-                                  },
-                                  buttonIndex => {
-                                      if (buttonIndex != PermSub2.length - 1) {
-                                          content.awning.M = PermSub2[buttonIndex]
-                                          this.setState({})
-                                      }
-                                  }
-                              )}
-                      >
-                          <Text>{content.awning.M || "Material"}</Text>
-                      </Button>
-                      <Text >{content.awning.I == true ? 'Intact' : 'Deteriorated'}</Text>
-                      <ListItem>
-                          <RkChoice rkType='posNeg' selected={content.awning.I} onChange={(e) => {
-                              content.awning.I = !content.awning.I
-                              this.setState({})
-                          }} />
-                      </ListItem>
-                      <Item>
-                          <Input keyboardType="numeric" placeholder="Reading" maxLength={4} value={content.awning.R} onChangeText={(text) => {
-                              let p = text.split('.').join('');
-                              content.awning.R = String((Math.round(p) / 10).toFixed(1));
-                              this.setState({})
-                          }} />
-                      </Item>
-                  </Col>
-              </Grid>
-              <Grid style={{ marginTop: 10 }}>
-                  <Col style={{ height: 200 }}>
-                      <Text>Window Screen</Text>
-                      <Button
-                          onPress={() =>
-                              ActionSheet.show(
-                                  {
-                                      options: PermSub2,
-                                      cancelButtonIndex: PermSub2.length - 1,
-                                      title: content.windowScreen.M || "Select Material"
-                                  },
-                                  buttonIndex => {
-                                      if (buttonIndex != PermSub2.length - 1) {
-                                          content.windowScreen.M = PermSub2[buttonIndex]
-                                          this.setState({})
-                                      }
-                                  }
-                              )}
-                      >
-                          <Text>{content.windowScreen.M || "Material"}</Text>
-                      </Button>
-                      <Text >{content.windowScreen.I == true ? 'Intact' : 'Deteriorated'}</Text>
-                      <ListItem>
-                          <RkChoice rkType='posNeg' selected={content.windowScreen.I} onChange={(e) => {
-                              content.windowScreen.I = !content.windowScreen.I
-                              this.setState({})
-                          }} />
-                      </ListItem>
-                      <Item>
-                          <Input keyboardType="numeric" placeholder="Reading" maxLength={4} value={content.windowScreen.R} onChangeText={(text) => {
-                              let p = text.split('.').join('');
-                              content.windowScreen.R = String((Math.round(p) / 10).toFixed(1));
-                              this.setState({})
-                          }} />
-                      </Item>
-                  </Col>
-              </Grid>
-              <Item stackedLabel>
-                  <Label>Comments</Label>
-                  <Input value={content.comments} onChangeText={(text) => { content.comments = text; this.setState({}) }} />
-              </Item>
-              {this.renderExteriorHtmlFooter(sheetId, content)}
-          </View>
-      );
-  }
-  /** exterior walls */
-  if (content.title == 'Exterior Walls') {
-      return (
-          <View keyboardDismissMode="on-drag">
-              {/* <Grid style={{ marginTop: 0 }}>
-                  <Col>
-                      <Button block error style={{ marginTop: 10 }}
-                          onPress={() =>
-                              ActionSheet.show(
-                                  {
-                                      options: EXTTYPES3,
-                                      cancelButtonIndex: EXTTYPES3.length - 1,
-                                      title: "Select Side"
-                                  },
-                                  buttonIndex => {
-                                      if (buttonIndex != EXTTYPES3.length - 1) {
-                                          content.doorType = EXTTYPES3[buttonIndex]
-                                      } else {
-                                          content.doorType = '';
-                                      }
-                                      this.setState({})
-                                  }
-                              )}>
-                          <Text>{content.doorType || 'Type'}</Text>
-                      </Button>
-                  </Col>
-              </Grid> */}
-
-              <Grid style={{ marginTop: 10 }}>
-                  <Col style={{ height: 200 }}>
-                      <Text>Wall </Text>
-                      <Button
-                          onPress={() =>
-                              ActionSheet.show(
-                                  {
-                                      options: PermSub3,
-                                      cancelButtonIndex: PermSub3.length - 1,
-                                      title: content.wallA.M || "Select Material"
-                                  },
-                                  buttonIndex => {
-                                      if (buttonIndex != PermSub3.length - 1) {
-                                          content.wallA.M = PermSub3[buttonIndex]
-                                          content.wallB.M = PermSub3[buttonIndex]
-                                          content.wallC.M = PermSub3[buttonIndex]
-                                          content.wallD.M = PermSub3[buttonIndex]
-                                          this.setState({})
-                                      }
-                                  }
-                              )}
-                      >
-                          <Text>{content.wallA.M || "Material"}</Text>
-                      </Button>
-                      <Text style={{ marginTop: 10 }} >{content.wallA.I == true ? 'Intact' : 'Deteriorated'}</Text>
-                      <ListItem>
-                          <RkChoice rkType='posNeg' selected={content.wallA.I} onChange={(e) => {
-                              content.wallA.I = !content.wallA.I
-                              this.setState({})
-                          }} />
-                      </ListItem>
-                      <Item>
-                          <Input keyboardType="numeric" placeholder="Reading" maxLength={4} value={content.wallA.R} onChangeText={(text) => {
-                              let p = text.split('.').join('');
-                              content.wallA.R = String((Math.round(p) / 10).toFixed(1));
-                              this.setState({})
-                          }} />
-                      </Item>
-                  </Col>
-                  <Col style={{ height: 200 }}>
-                      <Text>Wall</Text>
-                      <Button
-                          onPress={() =>
-                              ActionSheet.show(
-                                  {
-                                      options: PermSub3,
-                                      cancelButtonIndex: PermSub3.length - 1,
-                                      title: "Material"
-                                  },
-                                  buttonIndex => {
-                                      if (buttonIndex != PermSub3.length - 1) {
-                                          content.wallB.M = PermSub3[buttonIndex]
-                                          this.setState({})
-                                      }
-                                  }
-                              )}
-                      >
-                          <Text>{content.wallB.M || "Material"}</Text>
-                      </Button>
-                      <Text style={{ marginTop: 10 }}>{content.wallB.I == true ? 'Intact' : 'Deteriorated'}</Text>
-                      <ListItem>
-                          <RkChoice rkType='posNeg' selected={content.wallB.I} onChange={(e) => {
-                              content.wallB.I = !content.wallB.I
-                              this.setState({})
-                          }} />
-                      </ListItem>
-                      <Item>
-                          <Input keyboardType="numeric" placeholder="Reading" maxLength={4} value={content.wallB.R} onChangeText={(text) => {
-                              let p = text.split('.').join('');
-                              content.wallB.R = String((Math.round(p) / 10).toFixed(1));
-                              this.setState({})
-                          }} />
-                      </Item>
-                  </Col>
-                  <Col style={{ height: 200 }}>
-                      <Text>Wall</Text>
-                      <Button
-                          onPress={() =>
-                              ActionSheet.show(
-                                  {
-                                      options: PermSub3,
-                                      cancelButtonIndex: PermSub3.length - 1,
-                                      title: "Material"
-                                  },
-                                  buttonIndex => {
-                                      if (buttonIndex != PermSub3.length - 1) {
-                                          content.wallC.M = PermSub3[buttonIndex]
-                                          this.setState({})
-                                      }
-                                  }
-                              )}
-                      >
-                          <Text>{content.wallC.M || "Material"}</Text>
-                      </Button>
-                      <Text style={{ marginTop: 10 }}>{content.wallC.I == true ? 'Intact' : 'Deteriorated'}</Text>
-                      <ListItem>
-                          <RkChoice rkType='posNeg' selected={content.wallC.I} onChange={(e) => {
-                              content.wallC.I = !content.wallC.I
-                              this.setState({})
-                          }} />
-                      </ListItem>
-                      <Item>
-                          <Input keyboardType="numeric" placeholder="Reading" maxLength={4} value={content.wallC.R} onChangeText={(text) => {
-                              let p = text.split('.').join('');
-                              content.wallC.R = String((Math.round(p) / 10).toFixed(1));
-                              this.setState({})
-                          }} />
-                      </Item>
-                  </Col>
-                  <Col style={{ height: 200 }}>
-                      <Text>Wall</Text>
-                      <Button
-                          onPress={() =>
-                              ActionSheet.show(
-                                  {
-                                      options: PermSub3,
-                                      cancelButtonIndex: PermSub3.length - 1,
-                                      title: content.wallD.M || "Select Material"
-                                  },
-                                  buttonIndex => {
-                                      if (buttonIndex != PermSub3.length - 1) {
-                                          content.wallD.M = PermSub3[buttonIndex]
-                                          this.setState({})
-                                      }
-                                  }
-                              )}
-                      >
-                          <Text>{content.wallD.M || "Material"}</Text>
-                      </Button>
-                      <Text style={{ marginTop: 10 }}>{content.wallD.I == true ? 'Intact' : 'Deteriorated'}</Text>
-                      <ListItem>
-                          <RkChoice rkType='posNeg' selected={content.wallD.I} onChange={(e) => {
-                              content.wallD.I = !content.wallD.I
-                              this.setState({})
-                          }} />
-                      </ListItem>
-                      <Item>
-                          <Input keyboardType="numeric" placeholder="Reading" maxLength={4} value={content.wallD.R} onChangeText={(text) => {
-                              let p = text.split('.').join('');
-                              content.wallD.R = String((Math.round(p) / 10).toFixed(1));
-                              this.setState({})
-                          }} />
-                      </Item>
-                  </Col>
-              </Grid>
-              <Item stackedLabel>
-                  <Label>Comments</Label>
-                  <Input value={content.comments} onChangeText={(text) => { content.comments = text; this.setState({}) }} />
-              </Item>
-              {this.renderExteriorHtmlFooter(sheetId, content)}
-          </View>
-      );
-  }
-
-
-  /** roof trim */
-  if (content.title == 'Roof Trim') {
-      return (
-          <View keyboardDismissMode="on-drag">
-              <Grid style={{ marginTop: 0 }}>
-                  <Col>
-                      <Button block error style={{ marginTop: 10 }}
-                          onPress={() =>
-                              ActionSheet.show(
-                                  {
-                                      options: EXTTYPES4,
-                                      cancelButtonIndex: EXTTYPES4.length - 1,
-                                      title: "Select Side"
-                                  },
-                                  buttonIndex => {
-                                      if (buttonIndex != EXTTYPES4.length - 1) {
-                                          content.doorType = EXTTYPES4[buttonIndex]
-                                      } else {
-                                          content.doorType = '';
-                                      }
-                                      this.setState({})
-                                  }
-                              )}>
-                          <Text>{content.doorType || 'Type'}</Text>
-                      </Button>
-                  </Col>
-              </Grid>
-
-              <Grid style={{ marginTop: 10 }}>
-                  <Col style={{ height: 200 }}>
-                      <Text>Eaves</Text>
-                      <Grid style={{ marginBottom: 20 }}>
-                      <Col>
-                          <Button 
-                              onPress={() =>
-                                  ActionSheet.show(
-                                      {
-                                          options: SIDES,
-                                          cancelButtonIndex: SIDES.length - 1,
-                                          title: content.eaves.S || "Select Material"
-                                      },
-                                      buttonIndex => {
-                                          if (buttonIndex != SIDES.length - 1) {
-                                              content.eaves.S = SIDES[buttonIndex]
-                                          } else {
-                                              content.eaves.S= '';
-                                          }
-                                          this.setState({})
-                                      }
-                                  )}
-                          >
-                              <Text>{content.eaves.S || "Side"}</Text>
-                          </Button>
-                      </Col>
-                      <Col>
-                          <Button
-                              onPress={() =>
-                                  ActionSheet.show(
-                                      {
-                                          options: PermSub4,
-                                          cancelButtonIndex: PermSub4.length - 1,
-                                          title: content.eaves.M || "Select Material"
-                                      },
-                                      buttonIndex => {
-                                          if (buttonIndex != PermSub4.length - 1) {
-                                              content.eaves.M = PermSub4[buttonIndex]
-                                              content.rafters.M = PermSub4[buttonIndex]
-                                              content.fascia.M = PermSub4[buttonIndex]
-                                              content.soffit.M = PermSub4[buttonIndex]
-                                              content.corbel.M = PermSub4[buttonIndex]
-                                              content.roofSup.M = PermSub4[buttonIndex]
-                                              content.gutter.M = PermSub4[buttonIndex]
-                                              content.downspout.M = PermSub4[buttonIndex]
-                                              this.setState({})
-                                          }
-                                      }
-                                  )}
-                          >
-                              <Text>{content.eaves.M || "Material"}</Text>
-                          </Button>
-                          </Col>
-                      </Grid>
-                      <Text >{content.eaves.I == true ? 'Intact' : 'Deteriorated'}</Text>
-                      <ListItem>
-                          <RkChoice rkType='posNeg' selected={content.eaves.I} onChange={(e) => {
-                              content.eaves.I = !content.eaves.I
-                              this.setState({})
-                          }} />
-                      </ListItem>
-                      <Item>
-                          <Input keyboardType="numeric" placeholder="Reading" maxLength={4} value={content.eaves.R} onChangeText={(text) => {
-                              let p = text.split('.').join('');
-                              content.eaves.R = String((Math.round(p) / 10).toFixed(1));
-                              this.setState({})
-                          }} />
-                      </Item>
-                  </Col>
-                  <Col style={{ height: 200 }}>
-
-                      <Text>Rafters</Text>
-                      <Grid style={{ marginBottom: 20 }}>
-                      <Col>
-                          <Button 
-                              onPress={() =>
-                                  ActionSheet.show(
-                                      {
-                                          options: SIDES,
-                                          cancelButtonIndex: SIDES.length - 1,
-                                          title: content.rafters.S || "Select Material"
-                                      },
-                                      buttonIndex => {
-                                          if (buttonIndex != SIDES.length - 1) {
-                                              content.rafters.S = SIDES[buttonIndex]
-                                          } else {
-                                              content.rafters.S= '';
-                                          }
-                                          this.setState({})
-                                      }
-                                  )}
-                          >
-                              <Text>{content.rafters.S || "Side"}</Text>
-                          </Button>
-                      </Col>
-                      <Col>
-                          <Button
-                              onPress={() =>
-                                  ActionSheet.show(
-                                      {
-                                          options: PermSub4,
-                                          cancelButtonIndex: PermSub4.length - 1,
-                                          title: "Material"
-                                      },
-                                      buttonIndex => {
-                                          if (buttonIndex != PermSub4.length - 1) {
-                                              content.rafters.M = PermSub4[buttonIndex]
-                                              this.setState({})
-                                          }
-                                      }
-                                  )}
-                          >
-                              <Text>{content.rafters.M || "Material"}</Text>
-                          </Button>
-                          </Col>
-                      </Grid>
-                      <Text >{content.rafters.I == true ? 'Intact' : 'Deteriorated'}</Text>
-                      <ListItem>
-                          <RkChoice rkType='posNeg' selected={content.rafters.I} onChange={(e) => {
-                              content.rafters.I = !content.rafters.I
-                              this.setState({})
-                          }} />
-                      </ListItem>
-                      <Item>
-                          <Input keyboardType="numeric" placeholder="Reading" maxLength={4} value={content.rafters.R} onChangeText={(text) => {
-                              let p = text.split('.').join('');
-                              content.rafters.R = String((Math.round(p) / 10).toFixed(1));
-                              this.setState({})
-                          }} />
-                      </Item>
-                  </Col>
-
-              </Grid>
-              <Grid style={{ marginTop: 10 }}>
-                  <Col style={{ height: 200 }}>
-                      <Text>Fascia</Text>
-                      <Grid style={{ marginBottom: 20 }}>
-                      <Col>
-                          <Button 
-                              onPress={() =>
-                                  ActionSheet.show(
-                                      {
-                                          options: SIDES,
-                                          cancelButtonIndex: SIDES.length - 1,
-                                          title: content.fascia.S || "Select Material"
-                                      },
-                                      buttonIndex => {
-                                          if (buttonIndex != SIDES.length - 1) {
-                                              content.fascia.S = SIDES[buttonIndex]
-                                          } else {
-                                              content.fascia.S= '';
-                                          }
-                                          this.setState({})
-                                      }
-                                  )}
-                          >
-                              <Text>{content.fascia.S || "Side"}</Text>
-                          </Button>
-                      </Col>
-                      <Col>
-                          <Button
-                              onPress={() =>
-                                  ActionSheet.show(
-                                      {
-                                          options: PermSub4,
-                                          cancelButtonIndex: PermSub4.length - 1,
-                                          title: "Material"
-                                      },
-                                      buttonIndex => {
-                                          if (buttonIndex != PermSub4.length - 1) {
-                                              content.fascia.M = PermSub4[buttonIndex]
-                                              this.setState({})
-                                          }
-                                      }
-                                  )}
-                          >
-                              <Text>{content.fascia.M || "Material"}</Text>
-                          </Button>
-                          </Col>
-                      </Grid>
-                      <Text >{content.fascia.I == true ? 'Intact' : 'Deteriorated'}</Text>
-                      <ListItem>
-                          <RkChoice rkType='posNeg' selected={content.fascia.I} onChange={(e) => {
-                              content.fascia.I = !content.fascia.I
-                              this.setState({})
-                          }} />
-                      </ListItem>
-                      <Item>
-                          <Input keyboardType="numeric" placeholder="Reading" maxLength={4} value={content.fascia.R} onChangeText={(text) => {
-                              let p = text.split('.').join('');
-                              content.fascia.R = String((Math.round(p) / 10).toFixed(1));
-                              this.setState({})
-                          }} />
-                      </Item>
-                  </Col>
-                  <Col style={{ height: 200 }}>
-                      <Text>Soffit</Text>
-                      <Grid style={{ marginBottom: 20 }}>
-                      <Col>
-                          <Button 
-                              onPress={() =>
-                                  ActionSheet.show(
-                                      {
-                                          options: SIDES,
-                                          cancelButtonIndex: SIDES.length - 1,
-                                          title: content.soffit.S || "Select Material"
-                                      },
-                                      buttonIndex => {
-                                          if (buttonIndex != SIDES.length - 1) {
-                                              content.soffit.S = SIDES[buttonIndex]
-                                          } else {
-                                              content.soffit.S= '';
-                                          }
-                                          this.setState({})
-                                      }
-                                  )}
-                          >
-                              <Text>{content.soffit.S || "Side"}</Text>
-                          </Button>
-                      </Col>
-                      <Col>
-                          <Button
-                              onPress={() =>
-                                  ActionSheet.show(
-                                      {
-                                          options: PermSub4,
-                                          cancelButtonIndex: PermSub4.length - 1,
-                                          title: "Material"
-                                      },
-                                      buttonIndex => {
-                                          if (buttonIndex != PermSub4.length - 1) {
-                                              content.soffit.M = PermSub4[buttonIndex]
-                                              this.setState({})
-                                          }
-                                      }
-                                  )}
-                          >
-                              <Text>{content.soffit.M || "Material"}</Text>
-                          </Button>
-                          </Col>
-
-                      </Grid>
-                      <Text >{content.soffit.I == true ? 'Intact' : 'Deteriorated'}</Text>
-                      <ListItem>
-                          <RkChoice rkType='posNeg' selected={content.soffit.I} onChange={(e) => {
-                              content.soffit.I = !content.soffit.I
-                              this.setState({})
-                          }} />
-                      </ListItem>
-                      <Item>
-                          <Input keyboardType="numeric" placeholder="Reading" maxLength={4} value={content.soffit.R} onChangeText={(text) => {
-                              let p = text.split('.').join('');
-                              content.soffit.R = String((Math.round(p) / 10).toFixed(1));
-                              this.setState({})
-                          }} />
-                      </Item>
-                  </Col>
-
-              </Grid>
-              <Grid style={{ marginTop: 10 }}>
-                  <Col style={{ height: 200 }}>
-                      <Text>Gutter</Text>
-                      <Grid style={{ marginBottom: 20 }}>
-                      <Col>
-                          <Button 
-                              onPress={() =>
-                                  ActionSheet.show(
-                                      {
-                                          options: SIDES,
-                                          cancelButtonIndex: SIDES.length - 1,
-                                          title: content.gutter.S || "Select Material"
-                                      },
-                                      buttonIndex => {
-                                          if (buttonIndex != SIDES.length - 1) {
-                                              content.gutter.S = SIDES[buttonIndex]
-                                          } else {
-                                              content.gutter.S= '';
-                                          }
-                                          this.setState({})
-                                      }
-                                  )}
-                          >
-                              <Text>{content.gutter.S || "Side"}</Text>
-                          </Button>
-                      </Col>
-                      <Col>
-                          <Button
-                              onPress={() =>
-                                  ActionSheet.show(
-                                      {
-                                          options: PermSub4,
-                                          cancelButtonIndex: PermSub4.length - 1,
-                                          title: "Material"
-                                      },
-                                      buttonIndex => {
-                                          if (buttonIndex != PermSub4.length - 1) {
-                                              content.gutter.M = PermSub4[buttonIndex]
-                                              this.setState({})
-                                          }
-                                      }
-                                  )}
-                          >
-                              <Text>{content.gutter.M || "Material"}</Text>
-                          </Button>
-                          </Col>
-                      </Grid>
-                      <Text >{content.gutter.I == true ? 'Intact' : 'Deteriorated'}</Text>
-                      <ListItem>
-                          <RkChoice rkType='posNeg' selected={content.gutter.I} onChange={(e) => {
-                              content.gutter.I = !content.gutter.I
-                              this.setState({})
-                          }} />
-                      </ListItem>
-                      <Item>
-                          <Input keyboardType="numeric" placeholder="Reading" maxLength={4} value={content.gutter.R} onChangeText={(text) => {
-                              let p = text.split('.').join('');
-                              content.gutter.R = String((Math.round(p) / 10).toFixed(1));
-                              this.setState({})
-                          }} />
-                      </Item>
-                  </Col>
-                  <Col style={{ height: 200 }}>
-                      <Text>Downspout</Text>
-                      <Grid style={{ marginBottom: 20 }}>
+                        <Button block error style={{ marginTop: 10 }}
+                            onPress={() =>
+                                ActionSheet.show(
+                                    {
+                                        options: SIDES,
+                                        cancelButtonIndex: SIDES.length - 1,
+                                        title: "Select Side"
+                                    },
+                                    buttonIndex => {
+                                        if (buttonIndex != SIDES.length - 1) {
+                                            content.side = SIDES[buttonIndex]
+                                        } else {
+                                            content.side = '';
+                                        }
+                                        this.setState({})
+                                    }
+                                )}>
+                            <Text>{content.side || 'Side'}</Text>
+                        </Button>
+                    </Col>
+                    <Col>
+                        <Button block error style={{ marginTop: 10 }}
+                            onPress={() =>
+                                ActionSheet.show(
+                                    {
+                                        options: EXTTYPES1,
+                                        cancelButtonIndex: EXTTYPES1.length - 1,
+                                        title: "Select Side"
+                                    },
+                                    buttonIndex => {
+                                        if (buttonIndex != EXTTYPES1.length - 1) {
+                                            content.doorType = EXTTYPES1[buttonIndex]
+                                        } else {
+                                            content.doorType = '';
+                                        }
+                                        this.setState({})
+                                    }
+                                )}>
+                            <Text>{content.doorType || 'Type'}</Text>
+                        </Button>
+                    </Col>
+                </Grid>
+  
+                <Grid style={{ marginTop: 10 }}>
+                    <Col style={{ height: 200 }}>
+                        <Text>Door</Text>
+                        <Grid style={{ marginBottom: 20 }}>
                         <Col>
-                          <Button 
-                              onPress={() =>
-                                  ActionSheet.show(
-                                      {
-                                          options: SIDES,
-                                          cancelButtonIndex: SIDES.length - 1,
-                                          title: content.downspout.S || "Select Material"
-                                      },
-                                      buttonIndex => {
+                            <Button 
+                                onPress={() =>
+                                    ActionSheet.show(
+                                        {
+                                            options: SIDES,
+                                            cancelButtonIndex: SIDES.length - 1,
+                                            title: content.door.S || "Select Material"
+                                        },
+                                        buttonIndex => {
                                           if (buttonIndex != SIDES.length - 1) {
-                                              content.downspout.S = SIDES[buttonIndex]
-                                          } else {
-                                              content.downspout.S= '';
+                                              content.door.S = SIDES[buttonIndex]
+                                              content.frame.S = SIDES[buttonIndex]
+                                              content.thresh.S = SIDES[buttonIndex]
+                                              content.securitydoor.S = SIDES[buttonIndex]
+                                              content.screendoor.S = SIDES[buttonIndex]
                                           }
-                                          this.setState({})
-                                      }
-                                  )}
-                          >
-                              <Text>{content.downspout.S || "Side"}</Text>
-                          </Button>
-                      </Col>
-                      <Col>
-                          <Button
-                              onPress={() =>
-                                  ActionSheet.show(
-                                      {
-                                          options: PermSub4,
-                                          cancelButtonIndex: PermSub4.length - 1,
-                                          title: "Material"
-                                      },
-                                      buttonIndex => {
-                                          if (buttonIndex != PermSub4.length - 1) {
-                                              content.downspout.M = PermSub4[buttonIndex]
-                                              this.setState({})
+                                          else {
+                                              content.door.S= '';
+                                              content.frame.S = '';
+                                              content.thresh.S = '';
+                                              content.securitydoor.S = '';
+                                              content.screendoor.S = '';
                                           }
-                                      }
-                                  )}
-                          >
-                              <Text>{content.downspout.M || "Material"}</Text>
-                          </Button>
-                          </Col>
-                      </Grid>
-
-                      <Text >{content.downspout.I == true ? 'Intact' : 'Deteriorated'}</Text>
-                      <ListItem>
-                          <RkChoice rkType='posNeg' selected={content.downspout.I} onChange={(e) => {
-                              content.downspout.I = !content.downspout.I
-                              this.setState({})
-                          }} />
-                      </ListItem>
-                      <Item>
-                          <Input keyboardType="numeric" placeholder="Reading" maxLength={4} value={content.downspout.R} onChangeText={(text) => {
-                              let p = text.split('.').join('');
-                              content.downspout.R = String((Math.round(p) / 10).toFixed(1));
-                              this.setState({})
-                          }} />
-                      </Item>
-                  </Col>
-              </Grid>
-              <Grid style={{ marginTop: 10 }}>
-                  <Col style={{ height: 200 }}>
-                      <Text>Corbel</Text>
-                      <Grid style={{ marginBottom: 20 }}>
-                      <Col>
-                          <Button 
-                              onPress={() =>
-                                  ActionSheet.show(
-                                      {
-                                          options: SIDES,
-                                          cancelButtonIndex: SIDES.length - 1,
-                                          title: content.corbel.S || "Select Material"
-                                      },
-                                      buttonIndex => {
-                                          if (buttonIndex != SIDES.length - 1) {
-                                              content.corbel.S = SIDES[buttonIndex]
-                                          } else {
-                                              content.corbel.S= '';
-                                          }
-                                          this.setState({})
-                                      }
-                                  )}
-                          >
-                              <Text>{content.corbel.S || "Side"}</Text>
-                          </Button>
-                      </Col>
-                      <Col>
-                          <Button
-                              onPress={() =>
-                                  ActionSheet.show(
-                                      {
-                                          options: PermSub4,
-                                          cancelButtonIndex: PermSub4.length - 1,
-                                          title: "Material"
-                                      },
-                                      buttonIndex => {
-                                          if (buttonIndex != PermSub4.length - 1) {
-                                              content.corbel.M = PermSub4[buttonIndex]
-                                              this.setState({})
-                                          }
-                                      }
-                                  )}
-                          >
-                              <Text>{content.corbel.M || "Material"}</Text>
-                          </Button>
+                                            this.setState({})
+                                        }
+                                    )}
+                            >
+                                <Text>{content.door.S || "Side"}</Text>
+                            </Button>
                         </Col>
-                      </Grid>
-                      <Text >{content.corbel.I == true ? 'Intact' : 'Deteriorated'}</Text>
-                      <ListItem>
-                          <RkChoice rkType='posNeg' selected={content.corbel.I} onChange={(e) => {
-                              content.corbel.I = !content.corbel.I
-                              this.setState({})
-                          }} />
-                      </ListItem>
-                      <Item>
-                          <Input keyboardType="numeric" placeholder="Reading" maxLength={4} value={content.corbel.R} onChangeText={(text) => {
-                              let p = text.split('.').join('');
-                              content.corbel.R = String((Math.round(p) / 10).toFixed(1));
-                              this.setState({})
-                          }} />
-                      </Item>
-                  </Col>
-                  <Col style={{ height: 200 }}>
-                      <Text>Roof Support</Text>
-                      <Grid style={{ marginBottom: 20 }}>
-                      <Col>
-                          <Button 
-                              onPress={() =>
-                                  ActionSheet.show(
-                                      {
-                                          options: SIDES,
-                                          cancelButtonIndex: SIDES.length - 1,
-                                          title: content.roofSup.S || "Select Material"
-                                      },
-                                      buttonIndex => {
-                                          if (buttonIndex != SIDES.length - 1) {
-                                              content.roofSup.S = SIDES[buttonIndex]
-                                          } else {
-                                              content.roofSup.S= '';
-                                          }
-                                          this.setState({})
-                                      }
-                                  )}
-                          >
-                              <Text>{content.roofSup.S || "Side"}</Text>
-                          </Button>
-                      </Col>
-                      <Col>
-                          <Button
-                              onPress={() =>
-                                  ActionSheet.show(
-                                      {
-                                          options: PermSub4,
-                                          cancelButtonIndex: PermSub4.length - 1,
-                                          title: "Material"
-                                      },
-                                      buttonIndex => {
-                                          if (buttonIndex != PermSub4.length - 1) {
-                                              content.roofSup.M = PermSub4[buttonIndex]
-                                              this.setState({})
-                                          }
-                                      }
-                                  )}
-                          >
-                              <Text>{content.roofSup.M || "Material"}</Text>
-                          </Button>
-                          </Col>
-                      </Grid>
-                      <Text >{content.roofSup.I == true ? 'Intact' : 'Deteriorated'}</Text>
-                      <ListItem>
-                          <RkChoice rkType='posNeg' selected={content.roofSup.I} onChange={(e) => {
-                              content.roofSup.I = !content.roofSup.I
-                              this.setState({})
-                          }} />
-                      </ListItem>
-                      <Item>
-                          <Input keyboardType="numeric" placeholder="Reading" maxLength={4} value={content.roofSup.R} onChangeText={(text) => {
-                              let p = text.split('.').join('');
-                              content.roofSup.R = String((Math.round(p) / 10).toFixed(1));
-                              this.setState({})
-                          }} />
-                      </Item>
-                  </Col>
-              </Grid>
-              <Item stackedLabel>
-                  <Label>Comments</Label>
-                  <Input value={content.comments} onChangeText={(text) => { content.comments = text; this.setState({}) }} />
-              </Item>
-              {this.renderExteriorHtmlFooter(sheetId, content)}
-          </View>
-      );
-  }
- 
-  /** exterior trim start */
-  if (content.title == 'Exterior Trim') {
-      return (
-          <View keyboardDismissMode="on-drag">
-              <Grid style={{ marginTop: 0 }}>
-                  <Col>
-                      <Button block error style={{ marginTop: 10 }}
-                          onPress={() =>
-                              ActionSheet.show(
-                                  {
-                                      options: EXTTYPES1,
-                                      cancelButtonIndex: EXTTYPES1.length - 1,
-                                      title: "Select Side"
-                                  },
-                                  buttonIndex => {
-                                      if (buttonIndex != EXTTYPES1.length - 1) {
-                                          content.doorType = EXTTYPES1[buttonIndex]
-
-                                      } else {
-                                          content.doorType = '';
-                                      }
-                                      this.setState({})
-                                  }
-                              )}>
-                          <Text>{content.doorType || 'Type'}</Text>
-                      </Button>
-                  </Col>
-              </Grid>
-
-              <Grid style={{ marginTop: 10 }}>
-                  <Col style={{ height: 200 }}>
-                      <Text>Corner Boards</Text>
-                      <Grid style={{ marginBottom: 20 }}>
-                      <Col>
-                          <Button
-                              onPress={() =>
-                                  ActionSheet.show(
-                                      {
-                                          options: SIDES,
-                                          cancelButtonIndex: SIDES.length - 1,
-                                          title: content.cBoard.S || "Select Material"
-                                      },
-                                      buttonIndex => {
-                                          if (buttonIndex != SIDES.length - 1) {
-                                              content.cBoard.S = SIDES[buttonIndex]
-                                          } else {
-                                              content.cBoard.S = '';
-                                          }
-                                          this.setState({})
-                                      }
-                                  )}
-                          >
-                              <Text>{content.cBoard.S || "Side"}</Text>
-                          </Button>
-                      </Col>
-                      <Col>
-                          <Button
-                              onPress={() =>
-                                  ActionSheet.show(
-                                      {
-                                          options: PermSub6,
-                                          cancelButtonIndex: PermSub6.length - 1,
-                                          title: content.cBoard.M || "Select Material"
-                                      },
-                                      buttonIndex => {
-                                          if (buttonIndex != PermSub6.length - 1) {
-                                              content.cBoard.M = PermSub6[buttonIndex]
-                                              content.trim.M = PermSub6[buttonIndex]
-                                              content.hTrim.M = PermSub6[buttonIndex]
-                                              content.vTrim.M = PermSub6[buttonIndex]
-                                              content.mDoor.M = PermSub6[buttonIndex]
-                                              content.shelf.M = PermSub6[buttonIndex]
-                                              content.shelfSupport.M = PermSub6[buttonIndex]
-                                              content.support.M = PermSub6[buttonIndex]
-                                              this.setState({})
-                                          }
-                                      }
-                                  )}
-                          >
-                              <Text>{content.cBoard.M || "Material"}</Text>
-                          </Button>
-                          </Col>
-                      </Grid>
-                      <Text >{content.cBoard.I == true ? 'Intact' : 'Deteriorated'}</Text>
-                      <ListItem>
-                          <RkChoice rkType='posNeg' selected={content.cBoard.I} onChange={(e) => {
-                              content.cBoard.I = !content.cBoard.I
-                              this.setState({})
-                          }} />
-                      </ListItem>
-                      <Item>
-                          <Input keyboardType="numeric" placeholder="Reading" maxLength={4} value={content.cBoard.R} onChangeText={(text) => {
-                              let p = text.split('.').join('');
-                              content.cBoard.R = String((Math.round(p) / 10).toFixed(1));
-                              this.setState({})
-                          }} />
-                      </Item>
-                  </Col>
-
-                  <Col style={{ height: 200 }}>
-                      <Text>Trim</Text>
-                      <Grid style={{ marginBottom: 20 }}>
-                      <Col>
-                          <Button
-                              onPress={() =>
-                                  ActionSheet.show(
-                                      {
-                                          options: SIDES,
-                                          cancelButtonIndex: SIDES.length - 1,
-                                          title: content.trim.S || "Select Material"
-                                      },
-                                      buttonIndex => {
-                                          if (buttonIndex != SIDES.length - 1) {
-                                              content.trim.S = SIDES[buttonIndex]
-                                          } else {
-                                              content.trim.S = '';
-                                          }
-                                          this.setState({})
-                                      }
-                                  )}
-                          >
-                              <Text>{content.trim.S || "Side"}</Text>
-                          </Button>
-                      </Col>
-                      <Col>
-                          <Button
-                              onPress={() =>
-                                  ActionSheet.show(
-                                      {
-                                          options: PermSub6,
-                                          cancelButtonIndex: PermSub6.length - 1,
-                                          title: "Material"
-                                      },
-                                      buttonIndex => {
-                                          if (buttonIndex != PermSub6.length - 1) {
-                                              content.trim.M = PermSub6[buttonIndex]
-                                              this.setState({})
-                                          }
-                                      }
-                                  )}
-                          >
-                              <Text>{content.trim.M || "Material"}</Text>
-                          </Button>
-                          </Col>
-                      </Grid>
-                      <Text >{content.trim.I == true ? 'Intact' : 'Deteriorated'}</Text>
-                      <ListItem>
-                          <RkChoice rkType='posNeg' selected={content.trim.I} onChange={(e) => {
-                              content.trim.I = !content.trim.I
-                              this.setState({})
-                          }} />
-                      </ListItem>
-                      <Item>
-                          <Input keyboardType="numeric" placeholder="Reading" maxLength={4} value={content.trim.R} onChangeText={(text) => {
-                              let p = text.split('.').join('');
-                              content.trim.R = String((Math.round(p) / 10).toFixed(1));
-                              this.setState({})
-                          }} />
-                      </Item>
-                  </Col>
-              </Grid>
-              <Grid style={{ marginTop: 10 }}>
-                  <Col style={{ height: 200 }}>
-                      <Text>Horizontal Trim</Text>
-                      <Grid style={{ marginBottom: 20 }}>
-                      <Col>
-                          <Button
-                              onPress={() =>
-                                  ActionSheet.show(
-                                      {
-                                          options: SIDES,
-                                          cancelButtonIndex: SIDES.length - 1,
-                                          title: content.hTrim.S || "Select Material"
-                                      },
-                                      buttonIndex => {
-                                          if (buttonIndex != SIDES.length - 1) {
-                                              content.hTrim.S = SIDES[buttonIndex]
-                                          } else {
-                                              content.hTrim.S = '';
-                                          }
-                                          this.setState({})
-                                      }
-                                  )}
-                          >
-                              <Text>{content.hTrim.S || "Side"}</Text>
-                          </Button>
-                      </Col>
-                      <Col>
-                          <Button
-                              onPress={() =>
-                                  ActionSheet.show(
-                                      {
-                                          options: PermSub6,
-                                          cancelButtonIndex: PermSub6.length - 1,
-                                          title: "Material"
-                                      },
-                                      buttonIndex => {
-                                          if (buttonIndex != PermSub6.length - 1) {
-                                              content.hTrim.M = PermSub6[buttonIndex]
-                                              this.setState({})
-                                          }
-                                      }
-                                  )}
-                          >
-                              <Text>{content.hTrim.M || "Material"}</Text>
-                          </Button>
-                          </Col>
-                      </Grid>
-                      <Text >{content.hTrim.I == true ? 'Intact' : 'Deteriorated'}</Text>
-                      <ListItem>
-                          <RkChoice rkType='posNeg' selected={content.hTrim.I} onChange={(e) => {
-                              content.hTrim.I = !content.hTrim.I
-                              this.setState({})
-                          }} />
-                      </ListItem>
-                      <Item>
-                          <Input keyboardType="numeric" placeholder="Reading" maxLength={4} value={content.hTrim.R} onChangeText={(text) => {
-                              let p = text.split('.').join('');
-                              content.hTrim.R = String((Math.round(p) / 10).toFixed(1));
-                              this.setState({})
-                          }} />
-                      </Item>
-                  </Col>
-                  <Col style={{ height: 200 }}>
-                      <Text>Vertical Trim</Text>
-                      <Grid style={{ marginBottom: 20 }}>
-                      <Col>
-                          <Button
-                              onPress={() =>
-                                  ActionSheet.show(
-                                      {
-                                          options: SIDES,
-                                          cancelButtonIndex: SIDES.length - 1,
-                                          title: content.vTrim.S || "Select Material"
-                                      },
-                                      buttonIndex => {
-                                          if (buttonIndex != SIDES.length - 1) {
-                                              content.vTrim.S = SIDES[buttonIndex]
-                                          } else {
-                                              content.vTrim.S = '';
-                                          }
-                                          this.setState({})
-                                      }
-                                  )}
-                          >
-                              <Text>{content.vTrim.S || "Side"}</Text>
-                          </Button>
-                      </Col>
-                      <Col>
-                          <Button
-                              onPress={() =>
-                                  ActionSheet.show(
-                                      {
-                                          options: PermSub6,
-                                          cancelButtonIndex: PermSub6.length - 1,
-                                          title: "Material"
-                                      },
-                                      buttonIndex => {
-                                          if (buttonIndex != PermSub6.length - 1) {
-                                              content.vTrim.M = PermSub6[buttonIndex]
-                                              this.setState({})
-                                          }
-                                      }
-                                  )}
-                          >
-                              <Text>{content.vTrim.M || "Material"}</Text>
-                          </Button>
-                          </Col>
-                      </Grid>
-                      <Text >{content.vTrim.I == true ? 'Intact' : 'Deteriorated'}</Text>
-                      <ListItem>
-                          <RkChoice rkType='posNeg' selected={content.vTrim.I} onChange={(e) => {
-                              content.vTrim.I = !content.vTrim.I
-                              this.setState({})
-                          }} />
-                      </ListItem>
-                      <Item>
-                          <Input keyboardType="numeric" placeholder="Reading" maxLength={4} value={content.vTrim.R} onChangeText={(text) => {
-                              let p = text.split('.').join('');
-                              content.vTrim.R = String((Math.round(p) / 10).toFixed(1));
-                              this.setState({})
-                          }} />
-                      </Item>
-                  </Col>
-
-
-              </Grid>
-              <Grid style={{ marginTop: 10 }}>
-                  <Col style={{ height: 200 }}>
-                      <Text>Milk Door</Text>
-                      <Grid style={{ marginBottom: 20 }}>
-                      <Col>
-                          <Button
-                              onPress={() =>
-                                  ActionSheet.show(
-                                      {
-                                          options: SIDES,
-                                          cancelButtonIndex: SIDES.length - 1,
-                                          title: content.mDoor.S || "Select Material"
-                                      },
-                                      buttonIndex => {
-                                          if (buttonIndex != SIDES.length - 1) {
-                                              content.mDoor.S = SIDES[buttonIndex]
-                                          } else {
-                                              content.mDoor.S = '';
-                                          }
-                                          this.setState({})
-                                      }
-                                  )}
-                          >
-                              <Text>{content.mDoor.S || "Side"}</Text>
-                          </Button>
-                      </Col>
-                      <Col>
-                          <Button
-                              onPress={() =>
-                                  ActionSheet.show(
-                                      {
-                                          options: PermSub6,
-                                          cancelButtonIndex: PermSub6.length - 1,
-                                          title: "Material"
-                                      },
-                                      buttonIndex => {
-                                          if (buttonIndex != PermSub6.length - 1) {
-                                              content.mDoor.M = PermSub6[buttonIndex]
-                                              this.setState({})
-                                          }
-                                      }
-                                  )}
-                          >
-                              <Text>{content.mDoor.M || "Material"}</Text>
-                          </Button>
-                          </Col>
-                      </Grid>
-                      <Text >{content.mDoor.I == true ? 'Intact' : 'Deteriorated'}</Text>
-                      <ListItem>
-                          <RkChoice rkType='posNeg' selected={content.mDoor.I} onChange={(e) => {
-                              content.mDoor.I = !content.mDoor.I
-                              this.setState({})
-                          }} />
-                      </ListItem>
-                      <Item>
-                          <Input keyboardType="numeric" placeholder="Reading" maxLength={4} value={content.mDoor.R} onChangeText={(text) => {
-                              let p = text.split('.').join('');
-                              content.mDoor.R = String((Math.round(p) / 10).toFixed(1));
-                              this.setState({})
-                          }} />
-                      </Item>
-                  </Col>
-
-                  <Col style={{ height: 200 }}>
-                      <Text>Shelf</Text>
-                      <Grid style={{ marginBottom: 20 }}>
-                      <Col>
-                          <Button
-                              onPress={() =>
-                                  ActionSheet.show(
-                                      {
-                                          options: SIDES,
-                                          cancelButtonIndex: SIDES.length - 1,
-                                          title: content.shelf.S || "Select Material"
-                                      },
-                                      buttonIndex => {
-                                          if (buttonIndex != SIDES.length - 1) {
-                                              content.shelf.S = SIDES[buttonIndex]
-                                          } else {
-                                              content.shelf.S = '';
-                                          }
-                                          this.setState({})
-                                      }
-                                  )}
-                          >
-                              <Text>{content.shelf.S || "Side"}</Text>
-                          </Button>
-                      </Col>
-                      <Col>
-                          <Button
-                              onPress={() =>
-                                  ActionSheet.show(
-                                      {
-                                          options: PermSub6,
-                                          cancelButtonIndex: PermSub6.length - 1,
-                                          title: "Material"
-                                      },
-                                      buttonIndex => {
-                                          if (buttonIndex != PermSub6.length - 1) {
-                                              content.shelf.M = PermSub6[buttonIndex]
-                                              this.setState({})
-                                          }
-                                      }
-                                  )}
-                          >
-                              <Text>{content.shelf.M || "Material"}</Text>
-                          </Button>
-                          </Col>
-                      </Grid>
-                      <Text >{content.shelf.I == true ? 'Intact' : 'Deteriorated'}</Text>
-                      <ListItem>
-                          <RkChoice rkType='posNeg' selected={content.shelf.I} onChange={(e) => {
-                              content.shelf.I = !content.shelf.I
-                              this.setState({})
-                          }} />
-                      </ListItem>
-                      <Item>
-                          <Input keyboardType="numeric" placeholder="Reading" maxLength={4} value={content.shelf.R} onChangeText={(text) => {
-                              let p = text.split('.').join('');
-                              content.shelf.R = String((Math.round(p) / 10).toFixed(1));
-                              this.setState({})
-                          }} />
-                      </Item>
-                  </Col>
-              </Grid>
-              <Grid style={{ marginTop: 10 }}>
-                  <Col style={{ height: 200 }}>
-                      <Text>Shelf Support</Text>
-                      <Grid style={{ marginBottom: 20 }}>
-                      <Col>
-                          <Button
-                              onPress={() =>
-                                  ActionSheet.show(
-                                      {
-                                          options: SIDES,
-                                          cancelButtonIndex: SIDES.length - 1,
-                                          title: content.shelfSupport.S || "Select Material"
-                                      },
-                                      buttonIndex => {
-                                          if (buttonIndex != SIDES.length - 1) {
-                                              content.shelfSupport.S = SIDES[buttonIndex]
-                                          } else {
-                                              content.shelfSupport.S = '';
-                                          }
-                                          this.setState({})
-                                      }
-                                  )}
-                          >
-                              <Text>{content.shelfSupport.S || "Side"}</Text>
-                          </Button>
-                      </Col>
-                      <Col>
-                          <Button
-                              onPress={() =>
-                                  ActionSheet.show(
-                                      {
-                                          options: PermSub6,
-                                          cancelButtonIndex: PermSub6.length - 1,
-                                          title: "Material"
-                                      },
-                                      buttonIndex => {
-                                          if (buttonIndex != PermSub6.length - 1) {
-                                              content.shelfSupport.M = PermSub6[buttonIndex]
-                                              this.setState({})
-                                          }
-                                      }
-                                  )}
-                          >
-                              <Text>{content.shelfSupport.M || "Material"}</Text>
-                          </Button>
-                          </Col>
-                      </Grid>
-                      <Text >{content.shelfSupport.I == true ? 'Intact' : 'Deteriorated'}</Text>
-                      <ListItem>
-                          <RkChoice rkType='posNeg' selected={content.shelfSupport.I} onChange={(e) => {
-                              content.shelfSupport.I = !content.shelfSupport.I
-                              this.setState({})
-                          }} />
-                      </ListItem>
-                      <Item>
-                          <Input keyboardType="numeric" placeholder="Reading" maxLength={4} value={content.shelfSupport.R} onChangeText={(text) => {
-                              let p = text.split('.').join('');
-                              content.shelfSupport.R = String((Math.round(p) / 10).toFixed(1));
-                              this.setState({})
-                          }} />
-                      </Item>
-                  </Col>
-                  <Col style={{ height: 200 }}>
-                      <Text>Support</Text>
-                      <Grid style={{ marginBottom: 20 }}>
-                      <Col>
-                          <Button
-                              onPress={() =>
-                                  ActionSheet.show(
-                                      {
-                                          options: SIDES,
-                                          cancelButtonIndex: SIDES.length - 1,
-                                          title: content.support.S || "Select Material"
-                                      },
-                                      buttonIndex => {
-                                          if (buttonIndex != SIDES.length - 1) {
-                                              content.support.S = SIDES[buttonIndex]
-                                          } else {
-                                              content.support.S = '';
-                                          }
-                                          this.setState({})
-                                      }
-                                  )}
-                          >
-                              <Text>{content.support.S || "Side"}</Text>
-                          </Button>
-                      </Col>
-                      <Col>
-                          <Button
-                              onPress={() =>
-                                  ActionSheet.show(
-                                      {
-                                          options: PermSub6,
-                                          cancelButtonIndex: PermSub6.length - 1,
-                                          title: "Material"
-                                      },
-                                      buttonIndex => {
-                                          if (buttonIndex != PermSub6.length - 1) {
-                                              content.support.M = PermSub6[buttonIndex]
-                                              this.setState({})
-                                          }
-                                      }
-                                  )}
-                          >
-                              <Text>{content.support.M || "Material"}</Text>
-                          </Button>
-                          </Col>
-                      </Grid>
-                      <Text >{content.support.I == true ? 'Intact' : 'Deteriorated'}</Text>
-                      <ListItem>
-                          <RkChoice rkType='posNeg' selected={content.support.I} onChange={(e) => {
-                              content.support.I = !content.support.I
-                              this.setState({})
-                          }} />
-                      </ListItem>
-                      <Item>
-                          <Input keyboardType="numeric" placeholder="Reading" maxLength={4} value={content.support.R} onChangeText={(text) => {
-                              let p = text.split('.').join('');
-                              content.support.R = String((Math.round(p) / 10).toFixed(1));
-                              this.setState({})
-                          }} />
-                      </Item>
-                  </Col>
-              </Grid>
-              <Item stackedLabel>
-                  <Label>Comments</Label>
-                  <Input value={content.comments} onChangeText={(text) => { content.comments = text; this.setState({}) }} />
-              </Item>
-              {this.renderExteriorHtmlFooter(sheetId, content)}
-          </View>
-      );
-  }
- 
-
-
-  /** Garage Doors */
-  if (content.title == 'Garage Doors') {
-      return (
-          <View keyboardDismissMode="on-drag">
-              <Grid style={{ marginTop: 0 }}>
-                     <Col>
-                          <Button block error style={{ marginTop: 10 }}
-                              onPress={() =>
-                                  ActionSheet.show(
-                                      {
-                                          options: SIDES,
-                                          cancelButtonIndex: SIDES.length - 1,
-                                          title: content.side || "Select Material"
-                                      },
-                                      buttonIndex => {
-                                          if (buttonIndex != SIDES.length - 1) {
-                                              content.side = SIDES[buttonIndex]
-                                          } else {
-                                              content.side= '';
-                                          }
-                                          this.setState({})
-                                      }
-                                  )}
-                          >
-                              <Text>{content.side || "Side"}</Text>
-                          </Button>
-                      </Col>
-                      <Col>
-                      <Button block error style={{ marginTop: 10 }}
-                          onPress={() =>
-                              ActionSheet.show(
-                                  {
-                                      options: EXTTYPES1,
-                                      cancelButtonIndex: EXTTYPES1.length - 1,
-                                      title: "Select Type"
-                                  },
-                                  buttonIndex => {
-                                      if (buttonIndex != EXTTYPES1.length - 1) {
-                                          content.doorType = EXTTYPES1[buttonIndex]
-                                      } else {
-                                          content.doorType = '';
-                                      }
-                                      this.setState({})
-                                  }
-                              )}>
-                          <Text>{content.doorType || 'Type'}</Text>
-                      </Button>
-                  </Col>
-              </Grid>
-
-              <Grid style={{ marginTop: 10 }}>
-                  <Col style={{ height: 200 }}>
-                      <Text>Garage Door</Text>
-                      <Grid style={{ marginBottom: 20 }}>
-                          <Button
-                              onPress={() =>
-                                  ActionSheet.show(
-                                      {
-                                          options: PermSub5,
-                                          cancelButtonIndex: PermSub5.length - 1,
-                                          title: content.door.M || "Select Material"
-                                      },
-                                      buttonIndex => {
-                                          if (buttonIndex != PermSub5.length - 1) {
-                                              content.door.M = PermSub5[buttonIndex]
-                                              content.doorframe.M = PermSub5[buttonIndex]
-                                              this.setState({})
-                                          }
-                                      }
-                                  )}
-                          >
-                              <Text>{content.door.M || "Material"}</Text>
-                          </Button>
-                      </Grid>
-                      <Text >{content.door.I == true ? 'Intact' : 'Deteriorated'}</Text>
-                      <ListItem>
-                          <RkChoice rkType='posNeg' selected={content.door.I} onChange={(e) => {
-                              content.door.I = !content.door.I
-                              this.setState({})
-                          }} />
-                      </ListItem>
-                      <Item>
-                          <Input keyboardType="numeric" placeholder="Reading" maxLength={4} value={content.door.R} onChangeText={(text) => {
-                              let p = text.split('.').join('');
-                              content.door.R = String((Math.round(p) / 10).toFixed(1));
-                              this.setState({})
-                          }} />
-                      </Item>
-                  </Col>
-                  <Col style={{ height: 200 }}>
-                      <Text>Garage Door Frame</Text>
-                      <Grid style={{ marginBottom: 20 }}>
-                          <Button
-                              onPress={() =>
-                                  ActionSheet.show(
-                                      {
-                                          options: PermSub5,
-                                          cancelButtonIndex: PermSub5.length - 1,
-                                          title: "Material"
-                                      },
-                                      buttonIndex => {
-                                          if (buttonIndex != PermSub5.length - 1) {
-                                              content.doorframe.M = PermSub5[buttonIndex]
-                                              this.setState({})
-                                          }
-                                      }
-                                  )}
-                          >
-                              <Text>{content.doorframe.M || "Material"}</Text>
-                          </Button>
-                      </Grid>
-                      <Text >{content.doorframe.I == true ? 'Intact' : 'Deteriorated'}</Text>
-                      <ListItem>
-                          <RkChoice rkType='posNeg' selected={content.doorframe.I} onChange={(e) => {
-                              content.doorframe.I = !content.doorframe.I
-                              this.setState({})
-                          }} />
-                      </ListItem>
-                      <Item>
-                          <Input keyboardType="numeric" placeholder="Reading" maxLength={4} value={content.doorframe.R} onChangeText={(text) => {
-                              let p = text.split('.').join('');
-                              content.doorframe.R = String((Math.round(p) / 10).toFixed(1));
-                              this.setState({})
-                          }} />
-                      </Item>
-                  </Col>
-              </Grid>
-              <Item stackedLabel>
-                  <Label>Comments</Label>
-                  <Input value={content.comments} onChangeText={(text) => { content.comments = text; this.setState({}) }} />
-              </Item>
-              {this.renderExteriorHtmlFooter(sheetId, content)}
-          </View>
-      );
-  }
-  /**
-   * Misc Exteroir
-   */
-if (content.title == 'Misc Exterior') {
-  return (
-      <View keyboardDismissMode="on-drag">
-          <Grid style={{ marginTop: 0 }}>
-              <Col>
-                  <Button block error style={{ marginTop: 10 }}
-                      onPress={() =>
-                          ActionSheet.show(
-                              {
-                                  options: EXTTYPES1,
-                                  cancelButtonIndex: EXTTYPES1.length - 1,
-                                  title: "Select Type"
-                              },
-                              buttonIndex => {
-                                  if (buttonIndex != EXTTYPES1.length - 1) {
-                                      content.doorType = EXTTYPES1[buttonIndex]
-                                  } else {
-                                      content.doorType = '';
-                                  }
-                                  this.setState({})
-                              }
-                          )}>
-                      <Text>{content.doorType || 'Type'}</Text>
-                  </Button>
-              </Col>
-          </Grid>
-
-          <Grid style={{ marginTop: 10 }}>
-              <Col style={{ height: 200 }}>
-                  <Text>Electric Panel/Frame</Text>
-                  <Grid style={{ marginBottom: 20 }}>
-                      <Col>
-                          <Button
-                              onPress={() =>
-                                  ActionSheet.show(
-                                      {
-                                          options: SIDES,
-                                          cancelButtonIndex: SIDES.length - 1,
-                                          title: content.frame.S || "Select Material"
-                                      },
-                                      buttonIndex => {
+                        <Col>
+                        <Button
+                            onPress={() =>
+                                ActionSheet.show(
+                                    {
+                                        options: PermSub1,
+                                        cancelButtonIndex: 3,
+                                        title: content.door.M || "Select Material"
+                                    },
+                                    buttonIndex => {
+                                        if (buttonIndex != PermSub1.length - 1) {
+                                            content.door.M = PermSub1[buttonIndex]
+                                            content.frame.M = PermSub1[buttonIndex]
+                                            content.thresh.M = PermSub1[buttonIndex]
+                                            content.securitydoor.M = PermSub1[buttonIndex]
+                                            content.screendoor.M = PermSub1[buttonIndex]
+                                            this.setState({})
+                                        }
+                                    }
+                                )}
+                        >
+                            <Text>{content.door.M || "Material"}</Text>
+                        </Button>
+                        </Col>
+                        </Grid>
+                        <Text >{content.door.I == true ? 'Intact' : 'Deteriorated'}</Text>
+                        <ListItem>
+                            <RkChoice rkType='posNeg' selected={content.door.I} onChange={(e) => {
+                                content.door.I = !content.door.I
+                                this.setState({})
+                            }} />
+                        </ListItem>
+                        <Item>
+                            <Input keyboardType="numeric" placeholder="Reading" maxLength={4} value={content.door.R} onChangeText={(text) => {
+                                let p = text.split('.').join('');
+                                content.door.R = String((Math.round(p) / 10).toFixed(1));
+                                this.setState({})
+                            }} />
+                        </Item>
+                    </Col>
+  
+                    <Col style={{ height: 200 }}>
+                        <Text>Door Frame</Text>
+                        <Grid style={{ marginBottom: 20 }}>
+                        <Col>
+                            <Button 
+                                onPress={() =>
+                                    ActionSheet.show(
+                                        {
+                                            options: SIDES,
+                                            cancelButtonIndex: SIDES.length - 1,
+                                            title: content.frame.S || "Select Material"
+                                        },
+                                        buttonIndex => {
                                           if (buttonIndex != SIDES.length - 1) {
                                               content.frame.S = SIDES[buttonIndex]
-                                          } else {
+                                          }
+                                          else {
+                                              content.frame.S= '';
+                                          }
+                                            this.setState({})
+                                        }
+                                    )}
+                            >
+                                <Text>{content.frame.S || "Side"}</Text>
+                            </Button>
+                        </Col>
+                        <Col>
+                        <Button
+                            onPress={() =>
+                                ActionSheet.show(
+                                    {
+                                        options: PermSub1,
+                                        cancelButtonIndex: PermSub1.length - 1,
+                                        title: content.frame.M || "Select Material"
+                                    },
+                                    buttonIndex => {
+                                        if (buttonIndex != PermSub1.length - 1) {
+                                            content.frame.M = PermSub1[buttonIndex]
+                                            this.setState({})
+                                        }
+                                    }
+                                )}
+                        >
+                            <Text>{content.frame.M || "Material"}</Text>
+                        </Button>
+                        </Col>
+                        </Grid>
+                        <Text >{content.frame.I == true ? 'Intact' : 'Deteriorated'}</Text>
+                        <ListItem>
+                            <RkChoice rkType='posNeg' selected={content.frame.I} onChange={(e) => {
+                                content.frame.I = !content.frame.I
+                                this.setState({})
+                            }} />
+                        </ListItem>
+                        <Item>
+                            <Input keyboardType="numeric" placeholder="Reading" maxLength={4} value={content.frame.R} onChangeText={(text) => {
+                                let p = text.split('.').join('');
+                                content.frame.R = String((Math.round(p) / 10).toFixed(1));
+                                this.setState({})
+                            }} />
+                        </Item>
+                    </Col>
+  
+                    
+                </Grid>
+                <Grid style={{marginTop: 10  }}>
+                <Col style={{ height: 200 }}>
+                        <Text>Threshold</Text>
+                        <Grid style={{ marginBottom: 20 }}>
+                        <Col>
+                            <Button 
+                                onPress={() =>
+                                    ActionSheet.show(
+                                        {
+                                            options: SIDES,
+                                            cancelButtonIndex: SIDES.length - 1,
+                                            title: content.thresh.S || "Select Material"
+                                        },
+                                        buttonIndex => {
+                                          if (buttonIndex != SIDES.length - 1) {
+                                              content.thresh.S = SIDES[buttonIndex]
+                                          }
+                                          else {
+                                              content.thresh.S= '';
+                                          }
+                                            this.setState({})
+                                        }
+                                    )}
+                            >
+                                <Text>{content.thresh.S || "Side"}</Text>
+                            </Button>
+                        </Col>
+                        <Col>
+                        <Button
+                            onPress={() =>
+                                ActionSheet.show(
+                                    {
+                                        options: PermSub1,
+                                        cancelButtonIndex: PermSub1.length - 1,
+                                        title: content.thresh.M || "Select Material"
+                                    },
+                                    buttonIndex => {
+                                        if (buttonIndex != PermSub1.length - 1) {
+                                            content.thresh.M = PermSub1[buttonIndex]
+                                            this.setState({})
+                                        }
+                                    }
+                                )}
+                        >
+                            <Text>{content.thresh.M || "Material"}</Text>
+                        </Button>
+                        </Col>
+                        </Grid>
+                        <Text >{content.thresh.I == true ? 'Intact' : 'Deteriorated'}</Text>
+                        <ListItem>
+                            <RkChoice rkType='posNeg' selected={content.thresh.I} onChange={(e) => {
+                                content.thresh.I = !content.thresh.I
+                                this.setState({})
+                            }} />
+                        </ListItem>
+                        <Item>
+                            <Input keyboardType="numeric" placeholder="Reading" maxLength={4} value={content.thresh.R} onChangeText={(text) => {
+                                let p = text.split('.').join('');
+                                content.thresh.R = String((Math.round(p) / 10).toFixed(1));
+                                this.setState({})
+                            }} />
+                        </Item>
+                    </Col>
+                    <Col style={{ height: 200 }}>
+                        <Text>Security Door</Text>
+                        <Grid style={{ marginBottom: 20 }}>
+                        <Col>
+                            <Button 
+                                onPress={() =>
+                                    ActionSheet.show(
+                                        {
+                                            options: SIDES,
+                                            cancelButtonIndex: SIDES.length - 1,
+                                            title: content.securitydoor.S || "Select Material"
+                                        },
+                                        buttonIndex => {
+                                          if (buttonIndex != SIDES.length - 1) {
+                                              content.securitydoor.S = SIDES[buttonIndex]
+                                          }
+                                          else {
+                                              content.securitydoor.S= '';
+                                          }
+                                            this.setState({})
+                                        }
+                                    )}
+                            >
+                                <Text>{content.securitydoor.S || "Side"}</Text>
+                            </Button>
+                        </Col>
+                        <Col>
+                        <Button
+                            onPress={() =>
+                                ActionSheet.show(
+                                    {
+                                        options: PermSub1,
+                                        cancelButtonIndex: PermSub1.length - 1,
+                                        title: content.securitydoor.M || "Select Material"
+                                    },
+                                    buttonIndex => {
+                                        if (buttonIndex != PermSub1.length - 1) {
+                                            content.securitydoor.M = PermSub1[buttonIndex]
+                                            this.setState({})
+                                        }
+                                    }
+                                )}
+                        >
+                            <Text>{content.securitydoor.M || "Material"}</Text>
+                        </Button>
+                        </Col>
+                        </Grid>
+                        <Text >{content.securitydoor.I == true ? 'Intact' : 'Deteriorated'}</Text>
+                        <ListItem>
+                            <RkChoice rkType='posNeg' selected={content.securitydoor.I} onChange={(e) => {
+                                content.securitydoor.I = !content.securitydoor.I
+                                this.setState({})
+                            }} />
+                        </ListItem>
+                        <Item>
+                            <Input keyboardType="numeric" placeholder="Reading" maxLength={4} value={content.securitydoor.R} onChangeText={(text) => {
+                                let p = text.split('.').join('');
+                                content.securitydoor.R = String((Math.round(p) / 10).toFixed(1));
+                                this.setState({})
+                            }} />
+                        </Item>
+                    </Col>
+                </Grid>
+                <Grid style={{ marginTop: 10 }}>
+                    
+                    <Col style={{ height: 200 }}>
+                        <Text>Screen Door</Text>
+                        <Grid style={{ marginBottom: 20 }}>
+                        <Col>
+                            <Button 
+                                onPress={() =>
+                                    ActionSheet.show(
+                                        {
+                                            options: SIDES,
+                                            cancelButtonIndex: SIDES.length - 1,
+                                            title: content.screendoor.S || "Select Material"
+                                        },
+                                        buttonIndex => {
+                                          if (buttonIndex != SIDES.length - 1) {
+                                              content.screendoor.S = SIDES[buttonIndex]
+                                          }
+                                          else {
+                                              content.screendoor.S= '';
+                                          }
+                                            this.setState({})
+                                        }
+                                    )}
+                            >
+                                <Text>{content.screendoor.S || "Side"}</Text>
+                            </Button>
+                        </Col>
+                        <Col>
+                        <Button
+                            onPress={() =>
+                                ActionSheet.show(
+                                    {
+                                        options: PermSub1,
+                                        cancelButtonIndex: PermSub1.length - 1,
+                                        title: content.screendoor.M || "Select Material"
+                                    },
+                                    buttonIndex => {
+                                        if (buttonIndex != PermSub1.length - 1) {
+                                            content.screendoor.M = PermSub1[buttonIndex]
+                                            this.setState({})
+                                        }
+                                    }
+                                )}
+                        >
+                            <Text>{content.screendoor.M || "Material"}</Text>
+                        </Button>
+                        </Col>
+                        </Grid>
+                        <Text >{content.screendoor.I == true ? 'Intact' : 'Deteriorated'}</Text>
+                        <ListItem>
+                            <RkChoice rkType='posNeg' selected={content.screendoor.I} onChange={(e) => {
+                                content.screendoor.I = !content.screendoor.I
+                                this.setState({})
+                            }} />
+                        </ListItem>
+                        <Item>
+                            <Input keyboardType="numeric" placeholder="Reading" maxLength={4} value={content.screendoor.R} onChangeText={(text) => {
+                                let p = text.split('.').join('');
+                                content.screendoor.R = String((Math.round(p) / 10).toFixed(1));
+                                this.setState({})
+                            }} />
+                        </Item>
+                    </Col>
+                </Grid>
+                <Item stackedLabel>
+                    <Label>Comments</Label>
+                    <Input value={content.comments} onChangeText={(text) => { content.comments = text; this.setState({}) }} />
+                </Item>
+                {this.renderExteriorHtmlFooter(sheetId, content)}
+            </View>
+  
+        );
+    }
+    /** exterior windows */
+    if (content.title == 'Exterior Windows') {
+        return (
+            <View keyboardDismissMode="on-drag">
+                <Grid style={{ marginTop: 0 }}>
+                  <Col>
+                        <Button block error style={{ marginTop: 10 }}
+                            onPress={() =>
+                                ActionSheet.show(
+                                    {
+                                        options: SIDES,
+                                        cancelButtonIndex: SIDES.length - 1,
+                                        title: "Select Side"
+                                    },
+                                    buttonIndex => {
+                                        if (buttonIndex != SIDES.length - 1) {
+                                            content.side = SIDES[buttonIndex]
+                                        } else {
+                                            content.side = '';
+                                        }
+                                        this.setState({})
+                                    }
+                                )}>
+                            <Text>{content.side || 'Side'}</Text>
+                        </Button>
+                    </Col>
+  
+                    <Col>
+                        <Button block error style={{ marginTop: 10 }}
+                            onPress={() =>
+                                ActionSheet.show(
+                                    {
+                                        options: EXTTYPES2,
+                                        cancelButtonIndex: EXTTYPES2.length - 1,
+                                        title: "Select Side"
+                                    },
+                                    buttonIndex => {
+                                        if (buttonIndex != EXTTYPES2.length - 1) {
+                                            content.doorType = EXTTYPES2[buttonIndex]
+                                        } else {
+                                            content.doorType = '';
+                                        }
+                                        this.setState({})
+                                    }
+                                )}>
+                            <Text>{content.doorType || 'Type'}</Text>
+                        </Button>
+                    </Col>
+                </Grid>
+  
+                <Grid style={{ marginTop: 10 }}>
+                    <Col style={{ height: 200 }}>
+                        <Text>Window Well</Text>
+                        <Grid style={{ marginBottom: 20 }}>
+                        <Col>
+                            <Button 
+                                onPress={() =>
+                                    ActionSheet.show(
+                                        {
+                                            options: SIDES,
+                                            cancelButtonIndex: SIDES.length - 1,
+                                            title: content.well.S || "Select Material"
+                                        },
+                                        buttonIndex => {
+                                          if (buttonIndex != SIDES.length - 1) {
+                                              content.well.S = SIDES[buttonIndex]
+                                              content.sash.S = SIDES[buttonIndex]
+                                              content.frame.S = SIDES[buttonIndex]
+                                              content.shutters.S = SIDES[buttonIndex]
+                                              content.securitybars.S = SIDES[buttonIndex]
+                                              content.awning.S = SIDES[buttonIndex]
+                                              content.windowScreen.S = SIDES[buttonIndex]
+                                          }
+                                          else {
+                                              content.well.S= '';
+                                              content.sash.S = '';
                                               content.frame.S = '';
+                                              content.shutters.S = '';
+                                              content.securitybars.S = '';
+                                              content.awning.S = '';
+                                              content.windowScreen.S = '';
                                           }
-                                          this.setState({})
-                                      }
-                                  )}
-                          >
-                              <Text>{content.frame.S || "Side"}</Text>
-                          </Button>
-                      </Col>
-                      <Col>
-                          <Button
-                              onPress={() =>
-                                  ActionSheet.show(
-                                      {
-                                          options: PermSub7,
-                                          cancelButtonIndex: PermSub7.length - 1,
-                                          title: content.frame.M || "Select Material"
-                                      },
-                                      buttonIndex => {
-                                          if (buttonIndex != PermSub7.length - 1) {
-                                              content.frame.M = PermSub7[buttonIndex]
-                                              content.vent.M = PermSub7[buttonIndex]
-                                              content.accessPanel.M = PermSub7[buttonIndex]
-                                              content.gate.M = PermSub7[buttonIndex]
-                                              content.fence.M = PermSub7[buttonIndex]
-                                              content.playEquip.M = PermSub7[buttonIndex]
-                                              content.planterBox.M = PermSub7[buttonIndex]
-                                              content.equipment.M = PermSub7[buttonIndex]
-                                              this.setState({})
+                                            this.setState({})
+                                        }
+                                    )}
+                            >
+                                <Text>{content.well.S || "Side"}</Text>
+                            </Button>
+                        </Col>
+                        <Col>
+                        <Button
+                            onPress={() =>
+                                ActionSheet.show(
+                                    {
+                                        options: PermSub2,
+                                        cancelButtonIndex: PermSub2.length - 1,
+                                        title: content.well.M || "Select Material"
+                                    },
+                                    buttonIndex => {
+                                        if (buttonIndex != PermSub2.length - 1) {
+                                            content.well.M = PermSub2[buttonIndex]
+                                            content.sash.M = PermSub2[buttonIndex]
+                                            content.frame.M = PermSub2[buttonIndex]
+                                            content.shutters.M = PermSub2[buttonIndex]
+                                            content.securitybars.M = PermSub2[buttonIndex]
+                                            content.awning.M = PermSub2[buttonIndex]
+                                            content.windowScreen.M = PermSub2[buttonIndex]
+                                            this.setState({})
+                                        }
+                                    }
+                                )}
+                        >
+                            <Text>{content.well.M || "Material"}</Text>
+                        </Button>
+                        </Col>
+                        </Grid>
+                        <Text >{content.well.I == true ? 'Intact' : 'Deteriorated'}</Text>
+                        <ListItem>
+                            <RkChoice rkType='posNeg' selected={content.well.I} onChange={(e) => {
+                                content.well.I = !content.well.I
+                                this.setState({})
+                            }} />
+                        </ListItem>
+                        <Item>
+                            <Input keyboardType="numeric" placeholder="Reading" maxLength={4} value={content.well.R} onChangeText={(text) => {
+                                let p = text.split('.').join('');
+                                content.well.R = String((Math.round(p) / 10).toFixed(1));
+                                this.setState({})
+                            }} />
+                        </Item>
+                    </Col>
+  
+                    <Col style={{ height: 200 }}>
+                        <Text>Window Sash</Text>
+                        <Grid style={{ marginBottom: 20 }}>
+                        <Col>
+                            <Button 
+                                onPress={() =>
+                                    ActionSheet.show(
+                                        {
+                                            options: SIDES,
+                                            cancelButtonIndex: SIDES.length - 1,
+                                            title: content.sash.S || "Select Material"
+                                        },
+                                        buttonIndex => {
+                                          if (buttonIndex != SIDES.length - 1) {                                         
+                                              content.sash.S = SIDES[buttonIndex]
                                           }
-                                      }
-                                  )}
-                          >
-                              <Text>{content.frame.M || "Material"}</Text>
-                          </Button>
-                      </Col>
-                  </Grid>
-                  <Text >{content.frame.I == true ? 'Intact' : 'Deteriorated'}</Text>
-                  <ListItem>
-                      <RkChoice rkType='posNeg' selected={content.frame.I} onChange={(e) => {
-                          content.frame.I = !content.frame.I
-                          this.setState({})
-                      }} />
-                  </ListItem>
-                  <Item>
-                      <Input keyboardType="numeric" placeholder="Reading" maxLength={4} value={content.frame.R} onChangeText={(text) => {
-                          let p = text.split('.').join('');
-                          content.frame.R = String((Math.round(p) / 10).toFixed(1));
-                          this.setState({})
-                      }} />
-                  </Item>
-              </Col>
-              <Col style={{ height: 200 }}>
-                  <Text>Equipment</Text>
-                  <Grid style={{ marginBottom: 20 }}>
-                      <Col>
-                          <Button
-                              onPress={() =>
-                                  ActionSheet.show(
-                                      {
-                                          options: SIDES,
-                                          cancelButtonIndex: SIDES.length - 1,
-                                          title: content.equipment.S || "Select Material"
-                                      },
-                                      buttonIndex => {
+                                          else {
+                                              content.sash.S= '';
+                                          }
+                                            this.setState({})
+                                        }
+                                    )}
+                            >
+                                <Text>{content.sash.S || "Side"}</Text>
+                            </Button>
+                        </Col>
+                        <Col>
+                        <Button
+                            onPress={() =>
+                                ActionSheet.show(
+                                    {
+                                        options: PermSub2,
+                                        cancelButtonIndex: PermSub2.length - 1,
+                                        title: content.sash.M || "Select Material"
+                                    },
+                                    buttonIndex => {
+                                        if (buttonIndex != PermSub2.length - 1) {
+                                            content.sash.M = PermSub2[buttonIndex]
+                                            this.setState({})
+                                        }
+                                    }
+                                )}
+                        >
+                            <Text>{content.sash.M || "Material"}</Text>
+                        </Button>
+                        </Col>
+                        </Grid>
+                        <Text >{content.sash.I == true ? 'Intact' : 'Deteriorated'}</Text>
+                        <ListItem>
+                            <RkChoice rkType='posNeg' selected={content.sash.I} onChange={(e) => {
+                                content.sash.I = !content.sash.I
+                                this.setState({})
+                            }} />
+                        </ListItem>
+                        <Item>
+                            <Input keyboardType="numeric" placeholder="Reading" maxLength={4} value={content.sash.R} onChangeText={(text) => {
+                                let p = text.split('.').join('');
+                                content.sash.R = String((Math.round(p) / 10).toFixed(1));
+                                this.setState({})
+                            }} />
+                        </Item>
+                    </Col>
+                    
+                </Grid>
+                <Grid style={{ marginTop: 10 }}> 
+                <Col style={{ height: 200 }}>
+                        <Text>Window Frame</Text>
+                        <Grid style={{ marginBottom: 20 }}>
+                        <Col>
+                            <Button 
+                                onPress={() =>
+                                    ActionSheet.show(
+                                        {
+                                            options: SIDES,
+                                            cancelButtonIndex: SIDES.length - 1,
+                                            title: content.frame.S || "Select Material"
+                                        },
+                                        buttonIndex => {
+                                          if (buttonIndex != SIDES.length - 1) {                                         
+                                              content.frame.S = SIDES[buttonIndex]
+                                          }
+                                          else {
+                                              content.frame.S= '';
+                                          }
+                                            this.setState({})
+                                        }
+                                    )}
+                            >
+                                <Text>{content.frame.S || "Side"}</Text>
+                            </Button>
+                        </Col>
+                        <Col>
+                        <Button
+                            onPress={() =>
+                                ActionSheet.show(
+                                    {
+                                        options: PermSub2,
+                                        cancelButtonIndex: PermSub2.length - 1,
+                                        title: content.frame.M || "Select Material"
+                                    },
+                                    buttonIndex => {
+                                        if (buttonIndex != PermSub2.length - 1) {
+                                            content.frame.M = PermSub2[buttonIndex]
+                                            this.setState({})
+                                        }
+                                    }
+                                )}
+                        >
+                            <Text>{content.frame.M || "Material"}</Text>
+                        </Button>
+                        </Col>
+                        </Grid>
+                        <Text >{content.frame.I == true ? 'Intact' : 'Deteriorated'}</Text>
+                        <ListItem>
+                            <RkChoice rkType='posNeg' selected={content.frame.I} onChange={(e) => {
+                                content.frame.I = !content.frame.I
+                                this.setState({})
+                            }} />
+                        </ListItem>
+                        <Item>
+                            <Input keyboardType="numeric" placeholder="Reading" maxLength={4} value={content.frame.R} onChangeText={(text) => {
+                                let p = text.split('.').join('');
+                                content.frame.R = String((Math.round(p) / 10).toFixed(1));
+                                this.setState({})
+                            }} />
+                        </Item>
+                    </Col>
+                    <Col style={{ height: 200 }}>
+                        <Text>Awning</Text>
+                        <Grid style={{ marginBottom: 20 }}>
+                        <Col>
+                            <Button 
+                                onPress={() =>
+                                    ActionSheet.show(
+                                        {
+                                            options: SIDES,
+                                            cancelButtonIndex: SIDES.length - 1,
+                                            title: content.awning.S || "Select Material"
+                                        },
+                                        buttonIndex => {
+                                          if (buttonIndex != SIDES.length - 1) {                                         
+                                              content.awning.S = SIDES[buttonIndex]
+                                          }
+                                          else {
+                                              content.awning.S= '';
+                                          }
+                                            this.setState({})
+                                        }
+                                    )}
+                            >
+                                <Text>{content.awning.S || "Side"}</Text>
+                            </Button>
+                        </Col>
+                        <Col>
+                        <Button
+                            onPress={() =>
+                                ActionSheet.show(
+                                    {
+                                        options: PermSub2,
+                                        cancelButtonIndex: PermSub2.length - 1,
+                                        title: content.awning.M || "Select Material"
+                                    },
+                                    buttonIndex => {
+                                        if (buttonIndex != PermSub2.length - 1) {
+                                            content.awning.M = PermSub2[buttonIndex]
+                                            this.setState({})
+                                        }
+                                    }
+                                )}
+                        >
+                            <Text>{content.awning.M || "Material"}</Text>
+                        </Button>
+                        </Col>
+                        </Grid>
+                        <Text >{content.awning.I == true ? 'Intact' : 'Deteriorated'}</Text>
+                        <ListItem>
+                            <RkChoice rkType='posNeg' selected={content.awning.I} onChange={(e) => {
+                                content.awning.I = !content.awning.I
+                                this.setState({})
+                            }} />
+                        </ListItem>
+                        <Item>
+                            <Input keyboardType="numeric" placeholder="Reading" maxLength={4} value={content.awning.R} onChangeText={(text) => {
+                                let p = text.split('.').join('');
+                                content.awning.R = String((Math.round(p) / 10).toFixed(1));
+                                this.setState({})
+                            }} />
+                        </Item>
+                    </Col>
+                </Grid>
+  
+                <Grid style={{ marginTop: 10 }}>
+                    <Col style={{ height: 200 }}>
+                        <Text>Shutters</Text>
+                        <Grid style={{ marginBottom: 20 }}>
+                        <Col>
+                            <Button 
+                                onPress={() =>
+                                    ActionSheet.show(
+                                        {
+                                            options: SIDES,
+                                            cancelButtonIndex: SIDES.length - 1,
+                                            title: content.shutters.S || "Select Material"
+                                        },
+                                        buttonIndex => {
+                                          if (buttonIndex != SIDES.length - 1) {                                         
+                                              content.shutters.S = SIDES[buttonIndex]
+                                          }
+                                          else {
+                                              content.shutters.S= '';
+                                          }
+                                            this.setState({})
+                                        }
+                                    )}
+                            >
+                                <Text>{content.shutters.S || "Side"}</Text>
+                            </Button>
+                        </Col>
+                        <Col>
+                        <Button
+                            onPress={() =>
+                                ActionSheet.show(
+                                    {
+                                        options: PermSub2,
+                                        cancelButtonIndex: PermSub2.length - 1,
+                                        title: content.shutters.M || "Select Material"
+                                    },
+                                    buttonIndex => {
+                                        if (buttonIndex != PermSub2.length - 1) {
+                                            content.shutters.M = PermSub2[buttonIndex]
+                                            this.setState({})
+                                        }
+                                    }
+                                )}
+                        >
+                            <Text>{content.shutters.M || "Material"}</Text>
+                        </Button>
+                        </Col>
+                        </Grid>
+                        <Text >{content.shutters.I == true ? 'Intact' : 'Deteriorated'}</Text>
+                        <ListItem>
+                            <RkChoice rkType='posNeg' selected={content.shutters.I} onChange={(e) => {
+                                content.shutters.I = !content.shutters.I
+                                this.setState({})
+                            }} />
+                        </ListItem>
+                        <Item>
+                            <Input keyboardType="numeric" placeholder="Reading" maxLength={4} value={content.shutters.R} onChangeText={(text) => {
+                                let p = text.split('.').join('');
+                                content.shutters.R = String((Math.round(p) / 10).toFixed(1));
+                                this.setState({})
+                            }} />
+                        </Item>
+                    </Col>
+                    <Col style={{ height: 200 }}>
+                        <Text>Security Bars</Text>
+                        <Grid style={{ marginBottom: 20 }}>
+                        <Col>
+                            <Button 
+                                onPress={() =>
+                                    ActionSheet.show(
+                                        {
+                                            options: SIDES,
+                                            cancelButtonIndex: SIDES.length - 1,
+                                            title: content.securitybars.S || "Select Material"
+                                        },
+                                        buttonIndex => {
+                                          if (buttonIndex != SIDES.length - 1) {                                         
+                                              content.securitybars.S = SIDES[buttonIndex]
+                                          }
+                                          else {
+                                              content.securitybars.S= '';
+                                          }
+                                            this.setState({})
+                                        }
+                                    )}
+                            >
+                                <Text>{content.securitybars.S || "Side"}</Text>
+                            </Button>
+                        </Col>
+                        <Col>
+                        <Button
+                            onPress={() =>
+                                ActionSheet.show(
+                                    {
+                                        options: PermSub2,
+                                        cancelButtonIndex: PermSub2.length - 1,
+                                        title: content.securitybars.M || "Select Material"
+                                    },
+                                    buttonIndex => {
+                                        if (buttonIndex != PermSub2.length - 1) {
+                                            content.securitybars.M = PermSub2[buttonIndex]
+                                            this.setState({})
+                                        }
+                                    }
+                                )}
+                        >
+                            <Text>{content.securitybars.M || "Material"}</Text>
+                        </Button>
+                        </Col>
+                        </Grid>
+                        <Text >{content.securitybars.I == true ? 'Intact' : 'Deteriorated'}</Text>
+                        <ListItem>
+                            <RkChoice rkType='posNeg' selected={content.securitybars.I} onChange={(e) => {
+                                content.securitybars.I = !content.securitybars.I
+                                this.setState({})
+                            }} />
+                        </ListItem>
+                        <Item>
+                            <Input keyboardType="numeric" placeholder="Reading" maxLength={4} value={content.securitybars.R} onChangeText={(text) => {
+                                let p = text.split('.').join('');
+                                content.securitybars.R = String((Math.round(p) / 10).toFixed(1));
+                                this.setState({})
+                            }} />
+                        </Item>
+                    </Col>
+                   
+                </Grid>
+                <Grid style={{ marginTop: 10 }}>
+                    <Col style={{ height: 200 }}>
+                        <Text>Window Screen</Text>
+                        <Grid style={{ marginBottom: 20 }}>
+                        <Col>
+                            <Button 
+                                onPress={() =>
+                                    ActionSheet.show(
+                                        {
+                                            options: SIDES,
+                                            cancelButtonIndex: SIDES.length - 1,
+                                            title: content.windowScreen.S || "Select Material"
+                                        },
+                                        buttonIndex => {
+                                          if (buttonIndex != SIDES.length - 1) {                                         
+                                              content.windowScreen.S = SIDES[buttonIndex]
+                                          }
+                                          else {
+                                              content.windowScreen.S= '';
+                                          }
+                                            this.setState({})
+                                        }
+                                    )}
+                            >
+                                <Text>{content.windowScreen.S || "Side"}</Text>
+                            </Button>
+                        </Col>
+                        <Col>
+                        <Button
+                            onPress={() =>
+                                ActionSheet.show(
+                                    {
+                                        options: PermSub2,
+                                        cancelButtonIndex: PermSub2.length - 1,
+                                        title: content.windowScreen.M || "Select Material"
+                                    },
+                                    buttonIndex => {
+                                        if (buttonIndex != PermSub2.length - 1) {
+                                            content.windowScreen.M = PermSub2[buttonIndex]
+                                            this.setState({})
+                                        }
+                                    }
+                                )}
+                        >
+                            <Text>{content.windowScreen.M || "Material"}</Text>
+                        </Button>
+                        </Col>
+                        </Grid>
+                        <Text >{content.windowScreen.I == true ? 'Intact' : 'Deteriorated'}</Text>
+                        <ListItem>
+                            <RkChoice rkType='posNeg' selected={content.windowScreen.I} onChange={(e) => {
+                                content.windowScreen.I = !content.windowScreen.I
+                                this.setState({})
+                            }} />
+                        </ListItem>
+                        <Item>
+                            <Input keyboardType="numeric" placeholder="Reading" maxLength={4} value={content.windowScreen.R} onChangeText={(text) => {
+                                let p = text.split('.').join('');
+                                content.windowScreen.R = String((Math.round(p) / 10).toFixed(1));
+                                this.setState({})
+                            }} />
+                        </Item>
+                    </Col>
+                </Grid>
+                <Item stackedLabel>
+                    <Label>Comments</Label>
+                    <Input value={content.comments} onChangeText={(text) => { content.comments = text; this.setState({}) }} />
+                </Item>
+                {this.renderExteriorHtmlFooter(sheetId, content)}
+            </View>
+        );
+    }
+    /** exterior walls */
+    if (content.title == 'Exterior Walls') {
+        return (
+            <View keyboardDismissMode="on-drag">
+                {/* <Grid style={{ marginTop: 0 }}>
+                    <Col>
+                        <Button block error style={{ marginTop: 10 }}
+                            onPress={() =>
+                                ActionSheet.show(
+                                    {
+                                        options: EXTTYPES3,
+                                        cancelButtonIndex: EXTTYPES3.length - 1,
+                                        title: "Select Side"
+                                    },
+                                    buttonIndex => {
+                                        if (buttonIndex != EXTTYPES3.length - 1) {
+                                            content.doorType = EXTTYPES3[buttonIndex]
+                                        } else {
+                                            content.doorType = '';
+                                        }
+                                        this.setState({})
+                                    }
+                                )}>
+                            <Text>{content.doorType || 'Type'}</Text>
+                        </Button>
+                    </Col>
+                </Grid> */}
+  
+                <Grid style={{ marginTop: 10 }}>
+                    <Col style={{ height: 200 }}>
+                        <Text>Wall </Text>
+                        <Grid style={{ marginBottom: 20 }}>
+                        <Col>
+                            <Button 
+                                onPress={() =>
+                                    ActionSheet.show(
+                                        {
+                                            options: SIDES,
+                                            cancelButtonIndex: SIDES.length - 1,
+                                            title: content.wallA.S || "Select Material"
+                                        },
+                                        buttonIndex => {
                                           if (buttonIndex != SIDES.length - 1) {
-                                              content.equipment.S = SIDES[buttonIndex]
-                                          } else {
-                                              content.equipment.S = '';
+                                              content.wallA.S = SIDES[buttonIndex]
+                                              content.wallB.S = SIDES[buttonIndex]
+                                              content.wallC.S = SIDES[buttonIndex]
+                                              content.wallD.S = SIDES[buttonIndex]
                                           }
-                                          this.setState({})
-                                      }
-                                  )}
-                          >
-                              <Text>{content.equipment.S || "Side"}</Text>
-                          </Button>
-                      </Col>
-                      <Col>
-                          <Button
-                              onPress={() =>
-                                  ActionSheet.show(
-                                      {
-                                          options: PermSub7,
-                                          cancelButtonIndex: PermSub7.length - 1,
-                                          title: "Material"
-                                      },
-                                      buttonIndex => {
-                                          if (buttonIndex != PermSub7.length - 1) {
-                                              content.equipment.M = PermSub7[buttonIndex]
-                                              this.setState({})
+                                          else {
+                                              content.wallA.S = '';
+                                              content.wallB.S = '';
+                                              content.wallC.S = '';
+                                              content.wallD.S = '';
                                           }
-                                      }
-                                  )}
-                          >
-                              <Text>{content.equipment.M || "Material"}</Text>
-                          </Button>
-                      </Col>
-                  </Grid>
-                  <Text >{content.equipment.I == true ? 'Intact' : 'Deteriorated'}</Text>
-                  <ListItem>
-                      <RkChoice rkType='posNeg' selected={content.equipment.I} onChange={(e) => {
-                          content.equipment.I = !content.equipment.I
-                          this.setState({})
-                      }} />
-                  </ListItem>
-                  <Item>
-                      <Input keyboardType="numeric" placeholder="Reading" maxLength={4} value={content.equipment.R} onChangeText={(text) => {
-                          let p = text.split('.').join('');
-                          content.equipment.R = String((Math.round(p) / 10).toFixed(1));
-                          this.setState({})
-                      }} />
-                  </Item>
-              </Col>
-          </Grid>
-          <Grid style={{ marginTop: 10 }}>
-              <Col style={{ height: 200 }}>
-                  <Text>Heater Vent</Text>
-                  <Grid style={{ marginBottom: 20 }}>
-                      <Col>
-                          <Button
-                              onPress={() =>
-                                  ActionSheet.show(
-                                      {
-                                          options: SIDES,
-                                          cancelButtonIndex: SIDES.length - 1,
-                                          title: content.vent.S || "Select Material"
-                                      },
-                                      buttonIndex => {
+                                            this.setState({})
+                                        }
+                                    )}
+                            >
+                                <Text>{content.wallA.S || "Side"}</Text>
+                            </Button>
+                        </Col>
+                        <Col>
+                        <Button
+                            onPress={() =>
+                                ActionSheet.show(
+                                    {
+                                        options: PermSub3,
+                                        cancelButtonIndex: PermSub3.length - 1,
+                                        title: content.wallA.M || "Select Material"
+                                    },
+                                    buttonIndex => {
+                                        if (buttonIndex != PermSub3.length - 1) {
+                                            content.wallA.M = PermSub3[buttonIndex]
+                                            content.wallB.M = PermSub3[buttonIndex]
+                                            content.wallC.M = PermSub3[buttonIndex]
+                                            content.wallD.M = PermSub3[buttonIndex]
+                                            this.setState({})
+                                        }
+                                    }
+                                )}
+                        >
+                            <Text>{content.wallA.M || "Material"}</Text>
+                        </Button>
+                        </Col>
+                        </Grid>
+                        <Text style={{ marginTop: 10 }} >{content.wallA.I == true ? 'Intact' : 'Deteriorated'}</Text>
+                        <ListItem>
+                            <RkChoice rkType='posNeg' selected={content.wallA.I} onChange={(e) => {
+                                content.wallA.I = !content.wallA.I
+                                this.setState({})
+                            }} />
+                        </ListItem>
+                        <Item>
+                            <Input keyboardType="numeric" placeholder="Reading" maxLength={4} value={content.wallA.R} onChangeText={(text) => {
+                                let p = text.split('.').join('');
+                                content.wallA.R = String((Math.round(p) / 10).toFixed(1));
+                                this.setState({})
+                            }} />
+                        </Item>
+                    </Col>
+                    <Col style={{ height: 200 }}>
+                        <Text>Wall</Text>
+                        <Grid style={{ marginBottom: 20 }}>
+                        <Col>
+                            <Button 
+                                onPress={() =>
+                                    ActionSheet.show(
+                                        {
+                                            options: SIDES,
+                                            cancelButtonIndex: SIDES.length - 1,
+                                            title: content.wallB.S || "Select Material"
+                                        },
+                                        buttonIndex => {
                                           if (buttonIndex != SIDES.length - 1) {
-                                              content.vent.S = SIDES[buttonIndex]
-                                          } else {
-                                              content.vent.S = '';
+                                              content.wallB.S = SIDES[buttonIndex]
                                           }
-                                          this.setState({})
-                                      }
-                                  )}
-                          >
-                              <Text>{content.vent.S || "Side"}</Text>
-                          </Button>
-                      </Col>
-                      <Col>
-                          <Button
-                              onPress={() =>
-                                  ActionSheet.show(
-                                      {
-                                          options: PermSub7,
-                                          cancelButtonIndex: PermSub7.length - 1,
-                                          title: "Material"
-                                      },
-                                      buttonIndex => {
-                                          if (buttonIndex != PermSub7.length - 1) {
-                                              content.vent.M = PermSub7[buttonIndex]
-                                              this.setState({})
+                                          else {
+                                              content.wallB.S = '';
+                                             
                                           }
-                                      }
-                                  )}
-                          >
-                              <Text>{content.vent.M || "Material"}</Text>
-                          </Button>
-                      </Col>
-                  </Grid>
-                  <Text >{content.vent.I == true ? 'Intact' : 'Deteriorated'}</Text>
-                  <ListItem>
-                      <RkChoice rkType='posNeg' selected={content.vent.I} onChange={(e) => {
-                          content.vent.I = !content.vent.I
-                          this.setState({})
-                      }} />
-                  </ListItem>
-                  <Item>
-                      <Input keyboardType="numeric" placeholder="Reading" maxLength={4} value={content.vent.R} onChangeText={(text) => {
-                          let p = text.split('.').join('');
-                          content.vent.R = String((Math.round(p) / 10).toFixed(1));
-                          this.setState({})
-                      }} />
-                  </Item>
-              </Col>
-              <Col style={{ height: 200 }}>
-                  <Text>Access Panel/Frame</Text>
-                  <Grid style={{ marginBottom: 20 }}>
-                      <Col>
-                          <Button
-                              onPress={() =>
-                                  ActionSheet.show(
-                                      {
-                                          options: SIDES,
-                                          cancelButtonIndex: SIDES.length - 1,
-                                          title: content.accessPanel.S || "Select Material"
-                                      },
-                                      buttonIndex => {
+                                            this.setState({})
+                                        }
+                                    )}
+                            >
+                                <Text>{content.wallB.S || "Side"}</Text>
+                            </Button>
+                        </Col>
+                        <Col>
+                        <Button
+                            onPress={() =>
+                                ActionSheet.show(
+                                    {
+                                        options: PermSub3,
+                                        cancelButtonIndex: PermSub3.length - 1,
+                                        title: "Material"
+                                    },
+                                    buttonIndex => {
+                                        if (buttonIndex != PermSub3.length - 1) {
+                                            content.wallB.M = PermSub3[buttonIndex]
+                                            this.setState({})
+                                        }
+                                    }
+                                )}
+                        >
+                            <Text>{content.wallB.M || "Material"}</Text>
+                        </Button>
+                        </Col>
+                        </Grid>
+                        <Text style={{ marginTop: 10 }}>{content.wallB.I == true ? 'Intact' : 'Deteriorated'}</Text>
+                        <ListItem>
+                            <RkChoice rkType='posNeg' selected={content.wallB.I} onChange={(e) => {
+                                content.wallB.I = !content.wallB.I
+                                this.setState({})
+                            }} />
+                        </ListItem>
+                        <Item>
+                            <Input keyboardType="numeric" placeholder="Reading" maxLength={4} value={content.wallB.R} onChangeText={(text) => {
+                                let p = text.split('.').join('');
+                                content.wallB.R = String((Math.round(p) / 10).toFixed(1));
+                                this.setState({})
+                            }} />
+                        </Item>
+                    </Col>
+                    
+                    
+                </Grid>
+                <Grid style={{ marginTop: 10 }}>
+                <Col style={{ height: 200 }}>
+                        <Text>Wall</Text>
+                        <Grid style={{ marginBottom: 20 }}>
+                        <Col>
+                            <Button 
+                                onPress={() =>
+                                    ActionSheet.show(
+                                        {
+                                            options: SIDES,
+                                            cancelButtonIndex: SIDES.length - 1,
+                                            title: content.wallC.S || "Select Material"
+                                        },
+                                        buttonIndex => {
                                           if (buttonIndex != SIDES.length - 1) {
-                                              content.accessPanel.S = SIDES[buttonIndex]
-                                          } else {
-                                              content.accessPanel.S = '';
+                                              content.wallC.S = SIDES[buttonIndex]
                                           }
-                                          this.setState({})
-                                      }
-                                  )}
-                          >
-                              <Text>{content.accessPanel.S || "Side"}</Text>
-                          </Button>
-                      </Col>
-                      <Col>
-                          <Button
-                              onPress={() =>
-                                  ActionSheet.show(
-                                      {
-                                          options: PermSub7,
-                                          cancelButtonIndex: PermSub7.length - 1,
-                                          title: "Material"
-                                      },
-                                      buttonIndex => {
-                                          if (buttonIndex != PermSub7.length - 1) {
-                                              content.accessPanel.M = PermSub7[buttonIndex]
-                                              this.setState({})
+                                          else {
+                                              content.wallC.S = '';
+                                             
                                           }
-                                      }
-                                  )}
-                          >
-                              <Text>{content.accessPanel.M || "Material"}</Text>
-                          </Button>
-                      </Col>
-                  </Grid>
-                  <Text >{content.accessPanel.I == true ? 'Intact' : 'Deteriorated'}</Text>
-                  <ListItem>
-                      <RkChoice rkType='posNeg' selected={content.accessPanel.I} onChange={(e) => {
-                          content.accessPanel.I = !content.accessPanel.I
-                          this.setState({})
-                      }} />
-                  </ListItem>
-                  <Item>
-                      <Input keyboardType="numeric" placeholder="Reading" maxLength={4} value={content.accessPanel.R} onChangeText={(text) => {
-                          let p = text.split('.').join('');
-                          content.accessPanel.R = String((Math.round(p) / 10).toFixed(1));
-                          this.setState({})
-                      }} />
-                  </Item>
-              </Col>
-          </Grid>
-
-          <Grid style={{ marginTop: 10 }}>
-              <Col style={{ height: 200 }}>
-                  <Text>Gate</Text>
-                  <Grid style={{ marginBottom: 20 }}>
-                      <Col>
-                          <Button
-                              onPress={() =>
-                                  ActionSheet.show(
-                                      {
-                                          options: SIDES,
-                                          cancelButtonIndex: SIDES.length - 1,
-                                          title: content.gate.S || "Select Material"
-                                      },
-                                      buttonIndex => {
+                                            this.setState({})
+                                        }
+                                    )}
+                            >
+                                <Text>{content.wallC.S || "Side"}</Text>
+                            </Button>
+                        </Col>
+                        <Col>
+                        <Button
+                            onPress={() =>
+                                ActionSheet.show(
+                                    {
+                                        options: PermSub3,
+                                        cancelButtonIndex: PermSub3.length - 1,
+                                        title: "Material"
+                                    },
+                                    buttonIndex => {
+                                        if (buttonIndex != PermSub3.length - 1) {
+                                            content.wallC.M = PermSub3[buttonIndex]
+                                            this.setState({})
+                                        }
+                                    }
+                                )}
+                        >
+                            <Text>{content.wallC.M || "Material"}</Text>
+                        </Button>
+                        </Col>
+                        </Grid>
+                        <Text style={{ marginTop: 10 }}>{content.wallC.I == true ? 'Intact' : 'Deteriorated'}</Text>
+                        <ListItem>
+                            <RkChoice rkType='posNeg' selected={content.wallC.I} onChange={(e) => {
+                                content.wallC.I = !content.wallC.I
+                                this.setState({})
+                            }} />
+                        </ListItem>
+                        <Item>
+                            <Input keyboardType="numeric" placeholder="Reading" maxLength={4} value={content.wallC.R} onChangeText={(text) => {
+                                let p = text.split('.').join('');
+                                content.wallC.R = String((Math.round(p) / 10).toFixed(1));
+                                this.setState({})
+                            }} />
+                        </Item>
+                    </Col>
+                <Col style={{ height: 200 }}>
+                        <Text>Wall</Text>
+                        <Grid style={{ marginBottom: 20 }}>
+                        <Col>
+                            <Button 
+                                onPress={() =>
+                                    ActionSheet.show(
+                                        {
+                                            options: SIDES,
+                                            cancelButtonIndex: SIDES.length - 1,
+                                            title: content.wallD.S || "Select Material"
+                                        },
+                                        buttonIndex => {
                                           if (buttonIndex != SIDES.length - 1) {
-                                              content.gate.S = SIDES[buttonIndex]
-                                          } else {
-                                              content.gate.S = '';
+                                              content.wallD.S = SIDES[buttonIndex]
                                           }
-                                          this.setState({})
-                                      }
-                                  )}
-                          >
-                              <Text>{content.gate.S || "Side"}</Text>
-                          </Button>
-                      </Col>
-                      <Col>
-
-                          <Button
-                              onPress={() =>
-                                  ActionSheet.show(
-                                      {
-                                          options: PermSub7,
-                                          cancelButtonIndex: PermSub7.length - 1,
-                                          title: "Material"
-                                      },
-                                      buttonIndex => {
-                                          if (buttonIndex != PermSub7.length - 1) {
-                                              content.gate.M = PermSub7[buttonIndex]
-                                              this.setState({})
+                                          else {
+                                              content.wallD.S = '';
+                                             
                                           }
-                                      }
-                                  )}
-                          >
-                              <Text>{content.gate.M || "Material"}</Text>
-                          </Button>
-                      </Col>
-                  </Grid>
-                  <Text >{content.gate.I == true ? 'Intact' : 'Deteriorated'}</Text>
-                  <ListItem>
-                      <RkChoice rkType='posNeg' selected={content.gate.I} onChange={(e) => {
-                          content.gate.I = !content.gate.I
-                          this.setState({})
-                      }} />
-                  </ListItem>
-                  <Item>
-                      <Input keyboardType="numeric" placeholder="Reading" maxLength={4} value={content.gate.R} onChangeText={(text) => {
-                          let p = text.split('.').join('');
-                          content.gate.R = String((Math.round(p) / 10).toFixed(1));
-                          this.setState({})
-                      }} />
-                  </Item>
-              </Col>
-              <Col style={{ height: 200 }}>
-                  <Text>Fence</Text>
-                  <Grid style={{ marginBottom: 20 }}>
-                      <Col>
-                          <Button
-                              onPress={() =>
-                                  ActionSheet.show(
-                                      {
-                                          options: SIDES,
-                                          cancelButtonIndex: SIDES.length - 1,
-                                          title: content.fence.S || "Select Material"
-                                      },
-                                      buttonIndex => {
+                                            this.setState({})
+                                        }
+                                    )}
+                            >
+                                <Text>{content.wallD.S || "Side"}</Text>
+                            </Button>
+                        </Col>
+                        <Col>
+                        <Button
+                            onPress={() =>
+                                ActionSheet.show(
+                                    {
+                                        options: PermSub3,
+                                        cancelButtonIndex: PermSub3.length - 1,
+                                        title: content.wallD.M || "Select Material"
+                                    },
+                                    buttonIndex => {
+                                        if (buttonIndex != PermSub3.length - 1) {
+                                            content.wallD.M = PermSub3[buttonIndex]
+                                            this.setState({})
+                                        }
+                                    }
+                                )}
+                        >
+                            <Text>{content.wallD.M || "Material"}</Text>
+                        </Button>
+                        </Col>
+                        </Grid>
+                        <Text style={{ marginTop: 10 }}>{content.wallD.I == true ? 'Intact' : 'Deteriorated'}</Text>
+                        <ListItem>
+                            <RkChoice rkType='posNeg' selected={content.wallD.I} onChange={(e) => {
+                                content.wallD.I = !content.wallD.I
+                                this.setState({})
+                            }} />
+                        </ListItem>
+                        <Item>
+                            <Input keyboardType="numeric" placeholder="Reading" maxLength={4} value={content.wallD.R} onChangeText={(text) => {
+                                let p = text.split('.').join('');
+                                content.wallD.R = String((Math.round(p) / 10).toFixed(1));
+                                this.setState({})
+                            }} />
+                        </Item>
+                    </Col>      
+                </Grid>
+                <Item stackedLabel>
+                    <Label>Comments</Label>
+                    <Input value={content.comments} onChangeText={(text) => { content.comments = text; this.setState({}) }} />
+                </Item>
+                {this.renderExteriorHtmlFooter(sheetId, content)}
+            </View>
+        );
+    }
+  
+  
+    /** roof trim */
+    if (content.title == 'Roof Trim') {
+        return (
+            <View keyboardDismissMode="on-drag">
+                <Grid style={{ marginTop: 0 }}>
+                    <Col>
+                        <Button block error style={{ marginTop: 10 }}
+                            onPress={() =>
+                                ActionSheet.show(
+                                    {
+                                        options: EXTTYPES4,
+                                        cancelButtonIndex: EXTTYPES4.length - 1,
+                                        title: "Select Side"
+                                    },
+                                    buttonIndex => {
+                                        if (buttonIndex != EXTTYPES4.length - 1) {
+                                            content.doorType = EXTTYPES4[buttonIndex]
+                                        } else {
+                                            content.doorType = '';
+                                        }
+                                        this.setState({})
+                                    }
+                                )}>
+                            <Text>{content.doorType || 'Type'}</Text>
+                        </Button>
+                    </Col>
+                </Grid>
+  
+                <Grid style={{ marginTop: 10 }}>
+                    <Col style={{ height: 200 }}>
+                        <Text>Eaves</Text>
+                        <Grid style={{ marginBottom: 20 }}>
+                        <Col>
+                            <Button 
+                                onPress={() =>
+                                    ActionSheet.show(
+                                        {
+                                            options: SIDES,
+                                            cancelButtonIndex: SIDES.length - 1,
+                                            title: content.eaves.S || "Select Material"
+                                        },
+                                        buttonIndex => {
+                                            if (buttonIndex != SIDES.length - 1) {
+                                                content.eaves.S = SIDES[buttonIndex]
+                                                content.rafters.S = SIDES[buttonIndex]
+                                                content.fascia.S = SIDES[buttonIndex]
+                                                content.soffit.S = SIDES[buttonIndex]
+                                                content.corbel.S = SIDES[buttonIndex]
+                                                content.roofSup.S = SIDES[buttonIndex]
+                                                content.gutter.S = SIDES[buttonIndex]
+                                                content.downspout.S = SIDES[buttonIndex]
+                                            } else {
+                                                content.eaves.S = '';
+                                                content.rafters.S = '';
+                                                content.fascia.S = '';
+                                                content.soffit.S = '';
+                                                content.corbel.S = '';
+                                                content.roofSup.S = '';
+                                                content.gutter.S = '';
+                                                content.downspout.S = '';
+                                            }
+                                            this.setState({})
+                                        }
+                                    )}
+                            >
+                                <Text>{content.eaves.S || "Side"}</Text>
+                            </Button>
+                        </Col>
+                        <Col>
+                            <Button
+                                onPress={() =>
+                                    ActionSheet.show(
+                                        {
+                                            options: PermSub4,
+                                            cancelButtonIndex: PermSub4.length - 1,
+                                            title: content.eaves.M || "Select Material"
+                                        },
+                                        buttonIndex => {
+                                            if (buttonIndex != PermSub4.length - 1) {
+                                                content.eaves.M = PermSub4[buttonIndex]
+                                                content.rafters.M = PermSub4[buttonIndex]
+                                                content.fascia.M = PermSub4[buttonIndex]
+                                                content.soffit.M = PermSub4[buttonIndex]
+                                                content.corbel.M = PermSub4[buttonIndex]
+                                                content.roofSup.M = PermSub4[buttonIndex]
+                                                content.gutter.M = PermSub4[buttonIndex]
+                                                content.downspout.M = PermSub4[buttonIndex]
+                                                this.setState({})
+                                            }
+                                        }
+                                    )}
+                            >
+                                <Text>{content.eaves.M || "Material"}</Text>
+                            </Button>
+                            </Col>
+                        </Grid>
+                        <Text >{content.eaves.I == true ? 'Intact' : 'Deteriorated'}</Text>
+                        <ListItem>
+                            <RkChoice rkType='posNeg' selected={content.eaves.I} onChange={(e) => {
+                                content.eaves.I = !content.eaves.I
+                                this.setState({})
+                            }} />
+                        </ListItem>
+                        <Item>
+                            <Input keyboardType="numeric" placeholder="Reading" maxLength={4} value={content.eaves.R} onChangeText={(text) => {
+                                let p = text.split('.').join('');
+                                content.eaves.R = String((Math.round(p) / 10).toFixed(1));
+                                this.setState({})
+                            }} />
+                        </Item>
+                    </Col>
+                    <Col style={{ height: 200 }}>
+  
+                        <Text>Rafters</Text>
+                        <Grid style={{ marginBottom: 20 }}>
+                        <Col>
+                            <Button 
+                                onPress={() =>
+                                    ActionSheet.show(
+                                        {
+                                            options: SIDES,
+                                            cancelButtonIndex: SIDES.length - 1,
+                                            title: content.rafters.S || "Select Material"
+                                        },
+                                        buttonIndex => {
+                                            if (buttonIndex != SIDES.length - 1) {
+                                                content.rafters.S = SIDES[buttonIndex]
+                                            } else {
+                                                content.rafters.S= '';
+                                            }
+                                            this.setState({})
+                                        }
+                                    )}
+                            >
+                                <Text>{content.rafters.S || "Side"}</Text>
+                            </Button>
+                        </Col>
+                        <Col>
+                            <Button
+                                onPress={() =>
+                                    ActionSheet.show(
+                                        {
+                                            options: PermSub4,
+                                            cancelButtonIndex: PermSub4.length - 1,
+                                            title: "Material"
+                                        },
+                                        buttonIndex => {
+                                            if (buttonIndex != PermSub4.length - 1) {
+                                                content.rafters.M = PermSub4[buttonIndex]
+                                                this.setState({})
+                                            }
+                                        }
+                                    )}
+                            >
+                                <Text>{content.rafters.M || "Material"}</Text>
+                            </Button>
+                            </Col>
+                        </Grid>
+                        <Text >{content.rafters.I == true ? 'Intact' : 'Deteriorated'}</Text>
+                        <ListItem>
+                            <RkChoice rkType='posNeg' selected={content.rafters.I} onChange={(e) => {
+                                content.rafters.I = !content.rafters.I
+                                this.setState({})
+                            }} />
+                        </ListItem>
+                        <Item>
+                            <Input keyboardType="numeric" placeholder="Reading" maxLength={4} value={content.rafters.R} onChangeText={(text) => {
+                                let p = text.split('.').join('');
+                                content.rafters.R = String((Math.round(p) / 10).toFixed(1));
+                                this.setState({})
+                            }} />
+                        </Item>
+                    </Col>
+  
+                </Grid>
+                <Grid style={{ marginTop: 10 }}>
+                    <Col style={{ height: 200 }}>
+                        <Text>Fascia</Text>
+                        <Grid style={{ marginBottom: 20 }}>
+                        <Col>
+                            <Button 
+                                onPress={() =>
+                                    ActionSheet.show(
+                                        {
+                                            options: SIDES,
+                                            cancelButtonIndex: SIDES.length - 1,
+                                            title: content.fascia.S || "Select Material"
+                                        },
+                                        buttonIndex => {
+                                            if (buttonIndex != SIDES.length - 1) {
+                                                content.fascia.S = SIDES[buttonIndex]
+                                            } else {
+                                                content.fascia.S= '';
+                                            }
+                                            this.setState({})
+                                        }
+                                    )}
+                            >
+                                <Text>{content.fascia.S || "Side"}</Text>
+                            </Button>
+                        </Col>
+                        <Col>
+                            <Button
+                                onPress={() =>
+                                    ActionSheet.show(
+                                        {
+                                            options: PermSub4,
+                                            cancelButtonIndex: PermSub4.length - 1,
+                                            title: "Material"
+                                        },
+                                        buttonIndex => {
+                                            if (buttonIndex != PermSub4.length - 1) {
+                                                content.fascia.M = PermSub4[buttonIndex]
+                                                this.setState({})
+                                            }
+                                        }
+                                    )}
+                            >
+                                <Text>{content.fascia.M || "Material"}</Text>
+                            </Button>
+                            </Col>
+                        </Grid>
+                        <Text >{content.fascia.I == true ? 'Intact' : 'Deteriorated'}</Text>
+                        <ListItem>
+                            <RkChoice rkType='posNeg' selected={content.fascia.I} onChange={(e) => {
+                                content.fascia.I = !content.fascia.I
+                                this.setState({})
+                            }} />
+                        </ListItem>
+                        <Item>
+                            <Input keyboardType="numeric" placeholder="Reading" maxLength={4} value={content.fascia.R} onChangeText={(text) => {
+                                let p = text.split('.').join('');
+                                content.fascia.R = String((Math.round(p) / 10).toFixed(1));
+                                this.setState({})
+                            }} />
+                        </Item>
+                    </Col>
+                    <Col style={{ height: 200 }}>
+                        <Text>Soffit</Text>
+                        <Grid style={{ marginBottom: 20 }}>
+                        <Col>
+                            <Button 
+                                onPress={() =>
+                                    ActionSheet.show(
+                                        {
+                                            options: SIDES,
+                                            cancelButtonIndex: SIDES.length - 1,
+                                            title: content.soffit.S || "Select Material"
+                                        },
+                                        buttonIndex => {
+                                            if (buttonIndex != SIDES.length - 1) {
+                                                content.soffit.S = SIDES[buttonIndex]
+                                            } else {
+                                                content.soffit.S= '';
+                                            }
+                                            this.setState({})
+                                        }
+                                    )}
+                            >
+                                <Text>{content.soffit.S || "Side"}</Text>
+                            </Button>
+                        </Col>
+                        <Col>
+                            <Button
+                                onPress={() =>
+                                    ActionSheet.show(
+                                        {
+                                            options: PermSub4,
+                                            cancelButtonIndex: PermSub4.length - 1,
+                                            title: "Material"
+                                        },
+                                        buttonIndex => {
+                                            if (buttonIndex != PermSub4.length - 1) {
+                                                content.soffit.M = PermSub4[buttonIndex]
+                                                this.setState({})
+                                            }
+                                        }
+                                    )}
+                            >
+                                <Text>{content.soffit.M || "Material"}</Text>
+                            </Button>
+                            </Col>
+  
+                        </Grid>
+                        <Text >{content.soffit.I == true ? 'Intact' : 'Deteriorated'}</Text>
+                        <ListItem>
+                            <RkChoice rkType='posNeg' selected={content.soffit.I} onChange={(e) => {
+                                content.soffit.I = !content.soffit.I
+                                this.setState({})
+                            }} />
+                        </ListItem>
+                        <Item>
+                            <Input keyboardType="numeric" placeholder="Reading" maxLength={4} value={content.soffit.R} onChangeText={(text) => {
+                                let p = text.split('.').join('');
+                                content.soffit.R = String((Math.round(p) / 10).toFixed(1));
+                                this.setState({})
+                            }} />
+                        </Item>
+                    </Col>
+  
+                </Grid>
+                <Grid style={{ marginTop: 10 }}>
+                    <Col style={{ height: 200 }}>
+                        <Text>Gutter</Text>
+                        <Grid style={{ marginBottom: 20 }}>
+                        <Col>
+                            <Button 
+                                onPress={() =>
+                                    ActionSheet.show(
+                                        {
+                                            options: SIDES,
+                                            cancelButtonIndex: SIDES.length - 1,
+                                            title: content.gutter.S || "Select Material"
+                                        },
+                                        buttonIndex => {
+                                            if (buttonIndex != SIDES.length - 1) {
+                                                content.gutter.S = SIDES[buttonIndex]
+                                            } else {
+                                                content.gutter.S= '';
+                                            }
+                                            this.setState({})
+                                        }
+                                    )}
+                            >
+                                <Text>{content.gutter.S || "Side"}</Text>
+                            </Button>
+                        </Col>
+                        <Col>
+                            <Button
+                                onPress={() =>
+                                    ActionSheet.show(
+                                        {
+                                            options: PermSub4,
+                                            cancelButtonIndex: PermSub4.length - 1,
+                                            title: "Material"
+                                        },
+                                        buttonIndex => {
+                                            if (buttonIndex != PermSub4.length - 1) {
+                                                content.gutter.M = PermSub4[buttonIndex]
+                                                this.setState({})
+                                            }
+                                        }
+                                    )}
+                            >
+                                <Text>{content.gutter.M || "Material"}</Text>
+                            </Button>
+                            </Col>
+                        </Grid>
+                        <Text >{content.gutter.I == true ? 'Intact' : 'Deteriorated'}</Text>
+                        <ListItem>
+                            <RkChoice rkType='posNeg' selected={content.gutter.I} onChange={(e) => {
+                                content.gutter.I = !content.gutter.I
+                                this.setState({})
+                            }} />
+                        </ListItem>
+                        <Item>
+                            <Input keyboardType="numeric" placeholder="Reading" maxLength={4} value={content.gutter.R} onChangeText={(text) => {
+                                let p = text.split('.').join('');
+                                content.gutter.R = String((Math.round(p) / 10).toFixed(1));
+                                this.setState({})
+                            }} />
+                        </Item>
+                    </Col>
+                    <Col style={{ height: 200 }}>
+                        <Text>Downspout</Text>
+                        <Grid style={{ marginBottom: 20 }}>
+                          <Col>
+                            <Button 
+                                onPress={() =>
+                                    ActionSheet.show(
+                                        {
+                                            options: SIDES,
+                                            cancelButtonIndex: SIDES.length - 1,
+                                            title: content.downspout.S || "Select Material"
+                                        },
+                                        buttonIndex => {
+                                            if (buttonIndex != SIDES.length - 1) {
+                                                content.downspout.S = SIDES[buttonIndex]
+                                            } else {
+                                                content.downspout.S= '';
+                                            }
+                                            this.setState({})
+                                        }
+                                    )}
+                            >
+                                <Text>{content.downspout.S || "Side"}</Text>
+                            </Button>
+                        </Col>
+                        <Col>
+                            <Button
+                                onPress={() =>
+                                    ActionSheet.show(
+                                        {
+                                            options: PermSub4,
+                                            cancelButtonIndex: PermSub4.length - 1,
+                                            title: "Material"
+                                        },
+                                        buttonIndex => {
+                                            if (buttonIndex != PermSub4.length - 1) {
+                                                content.downspout.M = PermSub4[buttonIndex]
+                                                this.setState({})
+                                            }
+                                        }
+                                    )}
+                            >
+                                <Text>{content.downspout.M || "Material"}</Text>
+                            </Button>
+                            </Col>
+                        </Grid>
+  
+                        <Text >{content.downspout.I == true ? 'Intact' : 'Deteriorated'}</Text>
+                        <ListItem>
+                            <RkChoice rkType='posNeg' selected={content.downspout.I} onChange={(e) => {
+                                content.downspout.I = !content.downspout.I
+                                this.setState({})
+                            }} />
+                        </ListItem>
+                        <Item>
+                            <Input keyboardType="numeric" placeholder="Reading" maxLength={4} value={content.downspout.R} onChangeText={(text) => {
+                                let p = text.split('.').join('');
+                                content.downspout.R = String((Math.round(p) / 10).toFixed(1));
+                                this.setState({})
+                            }} />
+                        </Item>
+                    </Col>
+                </Grid>
+                <Grid style={{ marginTop: 10 }}>
+                    <Col style={{ height: 200 }}>
+                        <Text>Corbel</Text>
+                        <Grid style={{ marginBottom: 20 }}>
+                        <Col>
+                            <Button 
+                                onPress={() =>
+                                    ActionSheet.show(
+                                        {
+                                            options: SIDES,
+                                            cancelButtonIndex: SIDES.length - 1,
+                                            title: content.corbel.S || "Select Material"
+                                        },
+                                        buttonIndex => {
+                                            if (buttonIndex != SIDES.length - 1) {
+                                                content.corbel.S = SIDES[buttonIndex]
+                                            } else {
+                                                content.corbel.S= '';
+                                            }
+                                            this.setState({})
+                                        }
+                                    )}
+                            >
+                                <Text>{content.corbel.S || "Side"}</Text>
+                            </Button>
+                        </Col>
+                        <Col>
+                            <Button
+                                onPress={() =>
+                                    ActionSheet.show(
+                                        {
+                                            options: PermSub4,
+                                            cancelButtonIndex: PermSub4.length - 1,
+                                            title: "Material"
+                                        },
+                                        buttonIndex => {
+                                            if (buttonIndex != PermSub4.length - 1) {
+                                                content.corbel.M = PermSub4[buttonIndex]
+                                                this.setState({})
+                                            }
+                                        }
+                                    )}
+                            >
+                                <Text>{content.corbel.M || "Material"}</Text>
+                            </Button>
+                          </Col>
+                        </Grid>
+                        <Text >{content.corbel.I == true ? 'Intact' : 'Deteriorated'}</Text>
+                        <ListItem>
+                            <RkChoice rkType='posNeg' selected={content.corbel.I} onChange={(e) => {
+                                content.corbel.I = !content.corbel.I
+                                this.setState({})
+                            }} />
+                        </ListItem>
+                        <Item>
+                            <Input keyboardType="numeric" placeholder="Reading" maxLength={4} value={content.corbel.R} onChangeText={(text) => {
+                                let p = text.split('.').join('');
+                                content.corbel.R = String((Math.round(p) / 10).toFixed(1));
+                                this.setState({})
+                            }} />
+                        </Item>
+                    </Col>
+                    <Col style={{ height: 200 }}>
+                        <Text>Roof Support</Text>
+                        <Grid style={{ marginBottom: 20 }}>
+                        <Col>
+                            <Button 
+                                onPress={() =>
+                                    ActionSheet.show(
+                                        {
+                                            options: SIDES,
+                                            cancelButtonIndex: SIDES.length - 1,
+                                            title: content.roofSup.S || "Select Material"
+                                        },
+                                        buttonIndex => {
+                                            if (buttonIndex != SIDES.length - 1) {
+                                                content.roofSup.S = SIDES[buttonIndex]
+                                            } else {
+                                                content.roofSup.S= '';
+                                            }
+                                            this.setState({})
+                                        }
+                                    )}
+                            >
+                                <Text>{content.roofSup.S || "Side"}</Text>
+                            </Button>
+                        </Col>
+                        <Col>
+                            <Button
+                                onPress={() =>
+                                    ActionSheet.show(
+                                        {
+                                            options: PermSub4,
+                                            cancelButtonIndex: PermSub4.length - 1,
+                                            title: "Material"
+                                        },
+                                        buttonIndex => {
+                                            if (buttonIndex != PermSub4.length - 1) {
+                                                content.roofSup.M = PermSub4[buttonIndex]
+                                                this.setState({})
+                                            }
+                                        }
+                                    )}
+                            >
+                                <Text>{content.roofSup.M || "Material"}</Text>
+                            </Button>
+                            </Col>
+                        </Grid>
+                        <Text >{content.roofSup.I == true ? 'Intact' : 'Deteriorated'}</Text>
+                        <ListItem>
+                            <RkChoice rkType='posNeg' selected={content.roofSup.I} onChange={(e) => {
+                                content.roofSup.I = !content.roofSup.I
+                                this.setState({})
+                            }} />
+                        </ListItem>
+                        <Item>
+                            <Input keyboardType="numeric" placeholder="Reading" maxLength={4} value={content.roofSup.R} onChangeText={(text) => {
+                                let p = text.split('.').join('');
+                                content.roofSup.R = String((Math.round(p) / 10).toFixed(1));
+                                this.setState({})
+                            }} />
+                        </Item>
+                    </Col>
+                </Grid>
+                <Item stackedLabel>
+                    <Label>Comments</Label>
+                    <Input value={content.comments} onChangeText={(text) => { content.comments = text; this.setState({}) }} />
+                </Item>
+                {this.renderExteriorHtmlFooter(sheetId, content)}
+            </View>
+        );
+    }
+   
+    /** exterior trim start */
+    if (content.title == 'Exterior Trim') {
+        return (
+            <View keyboardDismissMode="on-drag">
+                <Grid style={{ marginTop: 0 }}>
+                    <Col>
+                        <Button block error style={{ marginTop: 10 }}
+                            onPress={() =>
+                                ActionSheet.show(
+                                    {
+                                        options: EXTTYPES1,
+                                        cancelButtonIndex: EXTTYPES1.length - 1,
+                                        title: "Select Side"
+                                    },
+                                    buttonIndex => {
+                                        if (buttonIndex != EXTTYPES1.length - 1) {
+                                            content.doorType = EXTTYPES1[buttonIndex]
+  
+                                        } else {
+                                            content.doorType = '';
+                                        }
+                                        this.setState({})
+                                    }
+                                )}>
+                            <Text>{content.doorType || 'Type'}</Text>
+                        </Button>
+                    </Col>
+                </Grid>
+  
+                <Grid style={{ marginTop: 10 }}>
+                    <Col style={{ height: 200 }}>
+                        <Text>Corner Boards</Text>
+                        <Grid style={{ marginBottom: 20 }}>
+                        <Col>
+                            <Button
+                                onPress={() =>
+                                    ActionSheet.show(
+                                        {
+                                            options: SIDES,
+                                            cancelButtonIndex: SIDES.length - 1,
+                                            title: content.cBoard.S || "Select Material"
+                                        },
+                                        buttonIndex => {
+                                            if (buttonIndex != SIDES.length - 1) {
+                                                content.cBoard.S = SIDES[buttonIndex]
+                                                content.trim.S = SIDES[buttonIndex]
+                                                content.hTrim.S = SIDES[buttonIndex]
+                                                content.vTrim.S = SIDES[buttonIndex]
+                                                content.mDoor.S = SIDES[buttonIndex]
+                                                content.shelf.S = SIDES[buttonIndex]
+                                                content.shelfSupport.S = SIDES[buttonIndex]
+                                                content.support.S = SIDES[buttonIndex]
+                                            } else {
+                                                content.cBoard.S = '';
+                                                content.trim.S = '';
+                                                content.hTrim.S = '';
+                                                content.vTrim.S = '';
+                                                content.mDoor.S = '';
+                                                content.shelf.S = '';
+                                                content.shelfSupport.S = '';
+                                                content.support.S = '';
+                                            }
+                                            this.setState({})
+                                        }
+                                    )}
+                            >
+                                <Text>{content.cBoard.S || "Side"}</Text>
+                            </Button>
+                        </Col>
+                        <Col>
+                            <Button
+                                onPress={() =>
+                                    ActionSheet.show(
+                                        {
+                                            options: PermSub6,
+                                            cancelButtonIndex: PermSub6.length - 1,
+                                            title: content.cBoard.M || "Select Material"
+                                        },
+                                        buttonIndex => {
+                                            if (buttonIndex != PermSub6.length - 1) {
+                                                content.cBoard.M = PermSub6[buttonIndex]
+                                                content.trim.M = PermSub6[buttonIndex]
+                                                content.hTrim.M = PermSub6[buttonIndex]
+                                                content.vTrim.M = PermSub6[buttonIndex]
+                                                content.mDoor.M = PermSub6[buttonIndex]
+                                                content.shelf.M = PermSub6[buttonIndex]
+                                                content.shelfSupport.M = PermSub6[buttonIndex]
+                                                content.support.M = PermSub6[buttonIndex]
+                                                this.setState({})
+                                            }
+                                        }
+                                    )}
+                            >
+                                <Text>{content.cBoard.M || "Material"}</Text>
+                            </Button>
+                            </Col>
+                        </Grid>
+                        <Text >{content.cBoard.I == true ? 'Intact' : 'Deteriorated'}</Text>
+                        <ListItem>
+                            <RkChoice rkType='posNeg' selected={content.cBoard.I} onChange={(e) => {
+                                content.cBoard.I = !content.cBoard.I
+                                this.setState({})
+                            }} />
+                        </ListItem>
+                        <Item>
+                            <Input keyboardType="numeric" placeholder="Reading" maxLength={4} value={content.cBoard.R} onChangeText={(text) => {
+                                let p = text.split('.').join('');
+                                content.cBoard.R = String((Math.round(p) / 10).toFixed(1));
+                                this.setState({})
+                            }} />
+                        </Item>
+                    </Col>
+  
+                    <Col style={{ height: 200 }}>
+                        <Text>Trim</Text>
+                        <Grid style={{ marginBottom: 20 }}>
+                        <Col>
+                            <Button
+                                onPress={() =>
+                                    ActionSheet.show(
+                                        {
+                                            options: SIDES,
+                                            cancelButtonIndex: SIDES.length - 1,
+                                            title: content.trim.S || "Select Material"
+                                        },
+                                        buttonIndex => {
+                                            if (buttonIndex != SIDES.length - 1) {
+                                                content.trim.S = SIDES[buttonIndex]
+                                            } else {
+                                                content.trim.S = '';
+                                            }
+                                            this.setState({})
+                                        }
+                                    )}
+                            >
+                                <Text>{content.trim.S || "Side"}</Text>
+                            </Button>
+                        </Col>
+                        <Col>
+                            <Button
+                                onPress={() =>
+                                    ActionSheet.show(
+                                        {
+                                            options: PermSub6,
+                                            cancelButtonIndex: PermSub6.length - 1,
+                                            title: "Material"
+                                        },
+                                        buttonIndex => {
+                                            if (buttonIndex != PermSub6.length - 1) {
+                                                content.trim.M = PermSub6[buttonIndex]
+                                                this.setState({})
+                                            }
+                                        }
+                                    )}
+                            >
+                                <Text>{content.trim.M || "Material"}</Text>
+                            </Button>
+                            </Col>
+                        </Grid>
+                        <Text >{content.trim.I == true ? 'Intact' : 'Deteriorated'}</Text>
+                        <ListItem>
+                            <RkChoice rkType='posNeg' selected={content.trim.I} onChange={(e) => {
+                                content.trim.I = !content.trim.I
+                                this.setState({})
+                            }} />
+                        </ListItem>
+                        <Item>
+                            <Input keyboardType="numeric" placeholder="Reading" maxLength={4} value={content.trim.R} onChangeText={(text) => {
+                                let p = text.split('.').join('');
+                                content.trim.R = String((Math.round(p) / 10).toFixed(1));
+                                this.setState({})
+                            }} />
+                        </Item>
+                    </Col>
+                </Grid>
+                <Grid style={{ marginTop: 10 }}>
+                    <Col style={{ height: 200 }}>
+                        <Text>Horizontal Trim</Text>
+                        <Grid style={{ marginBottom: 20 }}>
+                        <Col>
+                            <Button
+                                onPress={() =>
+                                    ActionSheet.show(
+                                        {
+                                            options: SIDES,
+                                            cancelButtonIndex: SIDES.length - 1,
+                                            title: content.hTrim.S || "Select Material"
+                                        },
+                                        buttonIndex => {
+                                            if (buttonIndex != SIDES.length - 1) {
+                                                content.hTrim.S = SIDES[buttonIndex]
+                                            } else {
+                                                content.hTrim.S = '';
+                                            }
+                                            this.setState({})
+                                        }
+                                    )}
+                            >
+                                <Text>{content.hTrim.S || "Side"}</Text>
+                            </Button>
+                        </Col>
+                        <Col>
+                            <Button
+                                onPress={() =>
+                                    ActionSheet.show(
+                                        {
+                                            options: PermSub6,
+                                            cancelButtonIndex: PermSub6.length - 1,
+                                            title: "Material"
+                                        },
+                                        buttonIndex => {
+                                            if (buttonIndex != PermSub6.length - 1) {
+                                                content.hTrim.M = PermSub6[buttonIndex]
+                                                this.setState({})
+                                            }
+                                        }
+                                    )}
+                            >
+                                <Text>{content.hTrim.M || "Material"}</Text>
+                            </Button>
+                            </Col>
+                        </Grid>
+                        <Text >{content.hTrim.I == true ? 'Intact' : 'Deteriorated'}</Text>
+                        <ListItem>
+                            <RkChoice rkType='posNeg' selected={content.hTrim.I} onChange={(e) => {
+                                content.hTrim.I = !content.hTrim.I
+                                this.setState({})
+                            }} />
+                        </ListItem>
+                        <Item>
+                            <Input keyboardType="numeric" placeholder="Reading" maxLength={4} value={content.hTrim.R} onChangeText={(text) => {
+                                let p = text.split('.').join('');
+                                content.hTrim.R = String((Math.round(p) / 10).toFixed(1));
+                                this.setState({})
+                            }} />
+                        </Item>
+                    </Col>
+                    <Col style={{ height: 200 }}>
+                        <Text>Vertical Trim</Text>
+                        <Grid style={{ marginBottom: 20 }}>
+                        <Col>
+                            <Button
+                                onPress={() =>
+                                    ActionSheet.show(
+                                        {
+                                            options: SIDES,
+                                            cancelButtonIndex: SIDES.length - 1,
+                                            title: content.vTrim.S || "Select Material"
+                                        },
+                                        buttonIndex => {
+                                            if (buttonIndex != SIDES.length - 1) {
+                                                content.vTrim.S = SIDES[buttonIndex]
+                                            } else {
+                                                content.vTrim.S = '';
+                                            }
+                                            this.setState({})
+                                        }
+                                    )}
+                            >
+                                <Text>{content.vTrim.S || "Side"}</Text>
+                            </Button>
+                        </Col>
+                        <Col>
+                            <Button
+                                onPress={() =>
+                                    ActionSheet.show(
+                                        {
+                                            options: PermSub6,
+                                            cancelButtonIndex: PermSub6.length - 1,
+                                            title: "Material"
+                                        },
+                                        buttonIndex => {
+                                            if (buttonIndex != PermSub6.length - 1) {
+                                                content.vTrim.M = PermSub6[buttonIndex]
+                                                this.setState({})
+                                            }
+                                        }
+                                    )}
+                            >
+                                <Text>{content.vTrim.M || "Material"}</Text>
+                            </Button>
+                            </Col>
+                        </Grid>
+                        <Text >{content.vTrim.I == true ? 'Intact' : 'Deteriorated'}</Text>
+                        <ListItem>
+                            <RkChoice rkType='posNeg' selected={content.vTrim.I} onChange={(e) => {
+                                content.vTrim.I = !content.vTrim.I
+                                this.setState({})
+                            }} />
+                        </ListItem>
+                        <Item>
+                            <Input keyboardType="numeric" placeholder="Reading" maxLength={4} value={content.vTrim.R} onChangeText={(text) => {
+                                let p = text.split('.').join('');
+                                content.vTrim.R = String((Math.round(p) / 10).toFixed(1));
+                                this.setState({})
+                            }} />
+                        </Item>
+                    </Col>
+  
+  
+                </Grid>
+                <Grid style={{ marginTop: 10 }}>
+                    <Col style={{ height: 200 }}>
+                        <Text>Milk Door</Text>
+                        <Grid style={{ marginBottom: 20 }}>
+                        <Col>
+                            <Button
+                                onPress={() =>
+                                    ActionSheet.show(
+                                        {
+                                            options: SIDES,
+                                            cancelButtonIndex: SIDES.length - 1,
+                                            title: content.mDoor.S || "Select Material"
+                                        },
+                                        buttonIndex => {
+                                            if (buttonIndex != SIDES.length - 1) {
+                                                content.mDoor.S = SIDES[buttonIndex]
+                                            } else {
+                                                content.mDoor.S = '';
+                                            }
+                                            this.setState({})
+                                        }
+                                    )}
+                            >
+                                <Text>{content.mDoor.S || "Side"}</Text>
+                            </Button>
+                        </Col>
+                        <Col>
+                            <Button
+                                onPress={() =>
+                                    ActionSheet.show(
+                                        {
+                                            options: PermSub6,
+                                            cancelButtonIndex: PermSub6.length - 1,
+                                            title: "Material"
+                                        },
+                                        buttonIndex => {
+                                            if (buttonIndex != PermSub6.length - 1) {
+                                                content.mDoor.M = PermSub6[buttonIndex]
+                                                this.setState({})
+                                            }
+                                        }
+                                    )}
+                            >
+                                <Text>{content.mDoor.M || "Material"}</Text>
+                            </Button>
+                            </Col>
+                        </Grid>
+                        <Text >{content.mDoor.I == true ? 'Intact' : 'Deteriorated'}</Text>
+                        <ListItem>
+                            <RkChoice rkType='posNeg' selected={content.mDoor.I} onChange={(e) => {
+                                content.mDoor.I = !content.mDoor.I
+                                this.setState({})
+                            }} />
+                        </ListItem>
+                        <Item>
+                            <Input keyboardType="numeric" placeholder="Reading" maxLength={4} value={content.mDoor.R} onChangeText={(text) => {
+                                let p = text.split('.').join('');
+                                content.mDoor.R = String((Math.round(p) / 10).toFixed(1));
+                                this.setState({})
+                            }} />
+                        </Item>
+                    </Col>
+  
+                    <Col style={{ height: 200 }}>
+                        <Text>Shelf</Text>
+                        <Grid style={{ marginBottom: 20 }}>
+                        <Col>
+                            <Button
+                                onPress={() =>
+                                    ActionSheet.show(
+                                        {
+                                            options: SIDES,
+                                            cancelButtonIndex: SIDES.length - 1,
+                                            title: content.shelf.S || "Select Material"
+                                        },
+                                        buttonIndex => {
+                                            if (buttonIndex != SIDES.length - 1) {
+                                                content.shelf.S = SIDES[buttonIndex]
+                                            } else {
+                                                content.shelf.S = '';
+                                            }
+                                            this.setState({})
+                                        }
+                                    )}
+                            >
+                                <Text>{content.shelf.S || "Side"}</Text>
+                            </Button>
+                        </Col>
+                        <Col>
+                            <Button
+                                onPress={() =>
+                                    ActionSheet.show(
+                                        {
+                                            options: PermSub6,
+                                            cancelButtonIndex: PermSub6.length - 1,
+                                            title: "Material"
+                                        },
+                                        buttonIndex => {
+                                            if (buttonIndex != PermSub6.length - 1) {
+                                                content.shelf.M = PermSub6[buttonIndex]
+                                                this.setState({})
+                                            }
+                                        }
+                                    )}
+                            >
+                                <Text>{content.shelf.M || "Material"}</Text>
+                            </Button>
+                            </Col>
+                        </Grid>
+                        <Text >{content.shelf.I == true ? 'Intact' : 'Deteriorated'}</Text>
+                        <ListItem>
+                            <RkChoice rkType='posNeg' selected={content.shelf.I} onChange={(e) => {
+                                content.shelf.I = !content.shelf.I
+                                this.setState({})
+                            }} />
+                        </ListItem>
+                        <Item>
+                            <Input keyboardType="numeric" placeholder="Reading" maxLength={4} value={content.shelf.R} onChangeText={(text) => {
+                                let p = text.split('.').join('');
+                                content.shelf.R = String((Math.round(p) / 10).toFixed(1));
+                                this.setState({})
+                            }} />
+                        </Item>
+                    </Col>
+                </Grid>
+                <Grid style={{ marginTop: 10 }}>
+                    <Col style={{ height: 200 }}>
+                        <Text>Shelf Support</Text>
+                        <Grid style={{ marginBottom: 20 }}>
+                        <Col>
+                            <Button
+                                onPress={() =>
+                                    ActionSheet.show(
+                                        {
+                                            options: SIDES,
+                                            cancelButtonIndex: SIDES.length - 1,
+                                            title: content.shelfSupport.S || "Select Material"
+                                        },
+                                        buttonIndex => {
+                                            if (buttonIndex != SIDES.length - 1) {
+                                                content.shelfSupport.S = SIDES[buttonIndex]
+                                            } else {
+                                                content.shelfSupport.S = '';
+                                            }
+                                            this.setState({})
+                                        }
+                                    )}
+                            >
+                                <Text>{content.shelfSupport.S || "Side"}</Text>
+                            </Button>
+                        </Col>
+                        <Col>
+                            <Button
+                                onPress={() =>
+                                    ActionSheet.show(
+                                        {
+                                            options: PermSub6,
+                                            cancelButtonIndex: PermSub6.length - 1,
+                                            title: "Material"
+                                        },
+                                        buttonIndex => {
+                                            if (buttonIndex != PermSub6.length - 1) {
+                                                content.shelfSupport.M = PermSub6[buttonIndex]
+                                                this.setState({})
+                                            }
+                                        }
+                                    )}
+                            >
+                                <Text>{content.shelfSupport.M || "Material"}</Text>
+                            </Button>
+                            </Col>
+                        </Grid>
+                        <Text >{content.shelfSupport.I == true ? 'Intact' : 'Deteriorated'}</Text>
+                        <ListItem>
+                            <RkChoice rkType='posNeg' selected={content.shelfSupport.I} onChange={(e) => {
+                                content.shelfSupport.I = !content.shelfSupport.I
+                                this.setState({})
+                            }} />
+                        </ListItem>
+                        <Item>
+                            <Input keyboardType="numeric" placeholder="Reading" maxLength={4} value={content.shelfSupport.R} onChangeText={(text) => {
+                                let p = text.split('.').join('');
+                                content.shelfSupport.R = String((Math.round(p) / 10).toFixed(1));
+                                this.setState({})
+                            }} />
+                        </Item>
+                    </Col>
+                    <Col style={{ height: 200 }}>
+                        <Text>Support</Text>
+                        <Grid style={{ marginBottom: 20 }}>
+                        <Col>
+                            <Button
+                                onPress={() =>
+                                    ActionSheet.show(
+                                        {
+                                            options: SIDES,
+                                            cancelButtonIndex: SIDES.length - 1,
+                                            title: content.support.S || "Select Material"
+                                        },
+                                        buttonIndex => {
+                                            if (buttonIndex != SIDES.length - 1) {
+                                                content.support.S = SIDES[buttonIndex]
+                                            } else {
+                                                content.support.S = '';
+                                            }
+                                            this.setState({})
+                                        }
+                                    )}
+                            >
+                                <Text>{content.support.S || "Side"}</Text>
+                            </Button>
+                        </Col>
+                        <Col>
+                            <Button
+                                onPress={() =>
+                                    ActionSheet.show(
+                                        {
+                                            options: PermSub6,
+                                            cancelButtonIndex: PermSub6.length - 1,
+                                            title: "Material"
+                                        },
+                                        buttonIndex => {
+                                            if (buttonIndex != PermSub6.length - 1) {
+                                                content.support.M = PermSub6[buttonIndex]
+                                                this.setState({})
+                                            }
+                                        }
+                                    )}
+                            >
+                                <Text>{content.support.M || "Material"}</Text>
+                            </Button>
+                            </Col>
+                        </Grid>
+                        <Text >{content.support.I == true ? 'Intact' : 'Deteriorated'}</Text>
+                        <ListItem>
+                            <RkChoice rkType='posNeg' selected={content.support.I} onChange={(e) => {
+                                content.support.I = !content.support.I
+                                this.setState({})
+                            }} />
+                        </ListItem>
+                        <Item>
+                            <Input keyboardType="numeric" placeholder="Reading" maxLength={4} value={content.support.R} onChangeText={(text) => {
+                                let p = text.split('.').join('');
+                                content.support.R = String((Math.round(p) / 10).toFixed(1));
+                                this.setState({})
+                            }} />
+                        </Item>
+                    </Col>
+                </Grid>
+                <Item stackedLabel>
+                    <Label>Comments</Label>
+                    <Input value={content.comments} onChangeText={(text) => { content.comments = text; this.setState({}) }} />
+                </Item>
+                {this.renderExteriorHtmlFooter(sheetId, content)}
+            </View>
+        );
+    }
+   
+  
+  
+    /** Garage Doors */
+    if (content.title == 'Garage Doors') {
+        return (
+            <View keyboardDismissMode="on-drag">
+                <Grid style={{ marginTop: 0 }}>
+                       <Col>
+                            <Button block error style={{ marginTop: 10 }}
+                                onPress={() =>
+                                    ActionSheet.show(
+                                        {
+                                            options: SIDES,
+                                            cancelButtonIndex: SIDES.length - 1,
+                                            title: content.side || "Select Material"
+                                        },
+                                        buttonIndex => {
+                                            if (buttonIndex != SIDES.length - 1) {
+                                                content.side = SIDES[buttonIndex]
+                                            } else {
+                                                content.side= '';
+                                            }
+                                            this.setState({})
+                                        }
+                                    )}
+                            >
+                                <Text>{content.side || "Side"}</Text>
+                            </Button>
+                        </Col>
+                        <Col>
+                        <Button block error style={{ marginTop: 10 }}
+                            onPress={() =>
+                                ActionSheet.show(
+                                    {
+                                        options: EXTTYPES1,
+                                        cancelButtonIndex: EXTTYPES1.length - 1,
+                                        title: "Select Type"
+                                    },
+                                    buttonIndex => {
+                                        if (buttonIndex != EXTTYPES1.length - 1) {
+                                            content.doorType = EXTTYPES1[buttonIndex]
+                                        } else {
+                                            content.doorType = '';
+                                        }
+                                        this.setState({})
+                                    }
+                                )}>
+                            <Text>{content.doorType || 'Type'}</Text>
+                        </Button>
+                    </Col>
+                </Grid>
+  
+                <Grid style={{ marginTop: 10 }}>
+                    <Col style={{ height: 200 }}>
+                        <Text>Garage Door</Text>
+                        <Grid style={{ marginBottom: 20 }}>
+                        <Col>
+                            <Button 
+                                onPress={() =>
+                                    ActionSheet.show(
+                                        {
+                                            options: SIDES,
+                                            cancelButtonIndex: SIDES.length - 1,
+                                            title: content.door.S || "Select Material"
+                                        },
+                                        buttonIndex => {
                                           if (buttonIndex != SIDES.length - 1) {
-                                              content.fence.S = SIDES[buttonIndex]
-                                          } else {
-                                              content.fence.S = '';
+                                              content.door.S = SIDES[buttonIndex]
+                                              content.doorframe.S = SIDES[buttonIndex]
                                           }
-                                          this.setState({})
-                                      }
-                                  )}
-                          >
-                              <Text>{content.fence.S || "Side"}</Text>
-                          </Button>
-                      </Col>
-                      <Col>
-                          <Button
-                              onPress={() =>
-                                  ActionSheet.show(
-                                      {
-                                          options: PermSub7,
-                                          cancelButtonIndex: PermSub7.length - 1,
-                                          title: "Material"
-                                      },
-                                      buttonIndex => {
-                                          if (buttonIndex != PermSub7.length - 1) {
-                                              content.fence.M = PermSub7[buttonIndex]
-                                              this.setState({})
+                                          else {
+                                              content.door.S = '';
+                                              content.doorframe.S = '';
+                                             
                                           }
-                                      }
-                                  )}
-                          >
-                              <Text>{content.fence.M || "Material"}</Text>
-                          </Button>
-                      </Col>
-                  </Grid>
-                  <Text >{content.fence.I == true ? 'Intact' : 'Deteriorated'}</Text>
-                  <ListItem>
-                      <RkChoice rkType='posNeg' selected={content.fence.I} onChange={(e) => {
-                          content.fence.I = !content.fence.I
-                          this.setState({})
-                      }} />
-                  </ListItem>
-                  <Item>
-                      <Input keyboardType="numeric" placeholder="Reading" maxLength={4} value={content.fence.R} onChangeText={(text) => {
-                          let p = text.split('.').join('');
-                          content.fence.R = String((Math.round(p) / 10).toFixed(1));
-                          this.setState({})
-                      }} />
-                  </Item>
-              </Col>
-          </Grid>
-
-          <Grid style={{ marginTop: 10 }}>
-              <Col style={{ height: 200 }}>
-                  <Text>Playground Equipment</Text>
-                  <Grid style={{ marginBottom: 20 }}>
-                      <Col>
-                          <Button
-                              onPress={() =>
-                                  ActionSheet.show(
-                                      {
-                                          options: SIDES,
-                                          cancelButtonIndex: SIDES.length - 1,
-                                          title: content.playEquip.S || "Select Material"
-                                      },
-                                      buttonIndex => {
+                                            this.setState({})
+                                        }
+                                    )}
+                            >
+                                <Text>{content.door.S || "Side"}</Text>
+                            </Button>
+                        </Col>
+                        <Col>
+                            <Button
+                                onPress={() =>
+                                    ActionSheet.show(
+                                        {
+                                            options: PermSub5,
+                                            cancelButtonIndex: PermSub5.length - 1,
+                                            title: content.door.M || "Select Material"
+                                        },
+                                        buttonIndex => {
+                                            if (buttonIndex != PermSub5.length - 1) {
+                                                content.door.M = PermSub5[buttonIndex]
+                                                content.doorframe.M = PermSub5[buttonIndex]
+                                                this.setState({})
+                                            }
+                                        }
+                                    )}
+                            >
+                                <Text>{content.door.M || "Material"}</Text>
+                            </Button>
+                            </Col>
+                        </Grid>
+                        <Text >{content.door.I == true ? 'Intact' : 'Deteriorated'}</Text>
+                        <ListItem>
+                            <RkChoice rkType='posNeg' selected={content.door.I} onChange={(e) => {
+                                content.door.I = !content.door.I
+                                this.setState({})
+                            }} />
+                        </ListItem>
+                        <Item>
+                            <Input keyboardType="numeric" placeholder="Reading" maxLength={4} value={content.door.R} onChangeText={(text) => {
+                                let p = text.split('.').join('');
+                                content.door.R = String((Math.round(p) / 10).toFixed(1));
+                                this.setState({})
+                            }} />
+                        </Item>
+                    </Col>
+                    <Col style={{ height: 200 }}>
+                        <Text>Garage Door Frame</Text>
+                        <Grid style={{ marginBottom: 20 }}>
+                        
+                        <Col>
+                            <Button 
+                                onPress={() =>
+                                    ActionSheet.show(
+                                        {
+                                            options: SIDES,
+                                            cancelButtonIndex: SIDES.length - 1,
+                                            title: content.doorframe.S || "Select Material"
+                                        },
+                                        buttonIndex => {
                                           if (buttonIndex != SIDES.length - 1) {
-                                              content.playEquip.S = SIDES[buttonIndex]
-                                          } else {
-                                              content.playEquip.S = '';
+                                            
+                                              content.doorframe.S = SIDES[buttonIndex]
                                           }
-                                          this.setState({})
-                                      }
-                                  )}
-                          >
-                              <Text>{content.playEquip.S || "Side"}</Text>
-                          </Button>
-                      </Col>
-                      <Col>
-                          <Button
-                              onPress={() =>
-                                  ActionSheet.show(
-                                      {
-                                          options: PermSub7,
-                                          cancelButtonIndex: PermSub7.length - 1,
-                                          title: "Material"
-                                      },
-                                      buttonIndex => {
-                                          if (buttonIndex != PermSub7.length - 1) {
-                                              content.playEquip.M = PermSub7[buttonIndex]
-                                              this.setState({})
+                                          else {
+                                             
+                                              content.doorframe.S = '';
+                                             
                                           }
-                                      }
-                                  )}
-                          >
-                              <Text>{content.playEquip.M || "Material"}</Text>
-                          </Button>
-                      </Col>
-                  </Grid>
-                  <Text >{content.playEquip.I == true ? 'Intact' : 'Deteriorated'}</Text>
-                  <ListItem>
-                      <RkChoice rkType='posNeg' selected={content.playEquip.I} onChange={(e) => {
-                          content.playEquip.I = !content.playEquip.I
-                          this.setState({})
-                      }} />
-                  </ListItem>
-                  <Item>
-                      <Input keyboardType="numeric" placeholder="Reading" maxLength={4} value={content.playEquip.R} onChangeText={(text) => {
-                          let p = text.split('.').join('');
-                          content.playEquip.R = String((Math.round(p) / 10).toFixed(1));
-                          this.setState({})
-                      }} />
-                  </Item>
-              </Col>
-              <Col style={{ height: 200 }}>
-                  <Text>Planter Box</Text>
-                  <Grid style={{ marginBottom: 20 }}>
-                      <Col>
-                          <Button
-                              onPress={() =>
-                                  ActionSheet.show(
-                                      {
-                                          options: SIDES,
-                                          cancelButtonIndex: SIDES.length - 1,
-                                          title: content.planterBox.S || "Select Material"
-                                      },
-                                      buttonIndex => {
-                                          if (buttonIndex != SIDES.length - 1) {
-                                              content.planterBox.S = SIDES[buttonIndex]
-                                          } else {
-                                              content.planterBox.S = '';
-                                          }
-                                          this.setState({})
-                                      }
-                                  )}
-                          >
-                              <Text>{content.planterBox.S || "Side"}</Text>
-                          </Button>
-                      </Col>
-                      <Col>
-                          <Button
-                              onPress={() =>
-                                  ActionSheet.show(
-                                      {
-                                          options: PermSub7,
-                                          cancelButtonIndex: PermSub7.length - 1,
-                                          title: "Material"
-                                      },
-                                      buttonIndex => {
-                                          if (buttonIndex != PermSub7.length - 1) {
-                                              content.planterBox.M = PermSub7[buttonIndex]
-                                              this.setState({})
-                                          }
-                                      }
-                                  )}
-                          >
-                              <Text>{content.planterBox.M || "Material"}</Text>
-                          </Button>
-                      </Col>
-                  </Grid>
-                  <Text >{content.planterBox.I == true ? 'Intact' : 'Deteriorated'}</Text>
-                  <ListItem>
-                      <RkChoice rkType='posNeg' selected={content.planterBox.I} onChange={(e) => {
-                          content.planterBox.I = !content.planterBox.I
-                          this.setState({})
-                      }} />
-                  </ListItem>
-                  <Item>
-                      <Input keyboardType="numeric" placeholder="Reading" maxLength={4} value={content.planterBox.R} onChangeText={(text) => {
-                          let p = text.split('.').join('');
-                          content.planterBox.R = String((Math.round(p) / 10).toFixed(1));
-                          this.setState({})
-                      }} />
-                  </Item>
-              </Col>
-          </Grid>
-          <Item stackedLabel>
-              <Label>Comments</Label>
-              <Input value={content.comments} onChangeText={(text) => { content.comments = text; this.setState({}) }} />
-          </Item>
-          {this.renderExteriorHtmlFooter(sheetId, content)}
-      </View>
-  );
-}
-}
+                                            this.setState({})
+                                        }
+                                    )}
+                            >
+                                <Text>{content.doorframe.S || "Side"}</Text>
+                            </Button>
+                        </Col>
+                        <Col>
+                            <Button
+                                onPress={() =>
+                                    ActionSheet.show(
+                                        {
+                                            options: PermSub5,
+                                            cancelButtonIndex: PermSub5.length - 1,
+                                            title: "Material"
+                                        },
+                                        buttonIndex => {
+                                            if (buttonIndex != PermSub5.length - 1) {
+                                                content.doorframe.M = PermSub5[buttonIndex]
+                                                this.setState({})
+                                            }
+                                        }
+                                    )}
+                            >
+                                <Text>{content.doorframe.M || "Material"}</Text>
+                            </Button>
+                            </Col>
+                        </Grid>
+                        <Text >{content.doorframe.I == true ? 'Intact' : 'Deteriorated'}</Text>
+                        <ListItem>
+                            <RkChoice rkType='posNeg' selected={content.doorframe.I} onChange={(e) => {
+                                content.doorframe.I = !content.doorframe.I
+                                this.setState({})
+                            }} />
+                        </ListItem>
+                        <Item>
+                            <Input keyboardType="numeric" placeholder="Reading" maxLength={4} value={content.doorframe.R} onChangeText={(text) => {
+                                let p = text.split('.').join('');
+                                content.doorframe.R = String((Math.round(p) / 10).toFixed(1));
+                                this.setState({})
+                            }} />
+                        </Item>
+                    </Col>
+                </Grid>
+                <Item stackedLabel>
+                    <Label>Comments</Label>
+                    <Input value={content.comments} onChangeText={(text) => { content.comments = text; this.setState({}) }} />
+                </Item>
+                {this.renderExteriorHtmlFooter(sheetId, content)}
+            </View>
+        );
+    }
+    /**
+     * Misc Exteroir
+     */
+  if (content.title == 'Misc Exterior') {
+    return (
+        <View keyboardDismissMode="on-drag">
+            <Grid style={{ marginTop: 0 }}>
+                <Col>
+                    <Button block error style={{ marginTop: 10 }}
+                        onPress={() =>
+                            ActionSheet.show(
+                                {
+                                    options: EXTTYPES1,
+                                    cancelButtonIndex: EXTTYPES1.length - 1,
+                                    title: "Select Type"
+                                },
+                                buttonIndex => {
+                                    if (buttonIndex != EXTTYPES1.length - 1) {
+                                        content.doorType = EXTTYPES1[buttonIndex]
+                                    } else {
+                                        content.doorType = '';
+                                    }
+                                    this.setState({})
+                                }
+                            )}>
+                        <Text>{content.doorType || 'Type'}</Text>
+                    </Button>
+                </Col>
+            </Grid>
+  
+            <Grid style={{ marginTop: 10 }}>
+                <Col style={{ height: 200 }}>
+                    <Text>Electric Panel/Frame</Text>
+                    <Grid style={{ marginBottom: 20 }}>
+                        <Col>
+                            <Button
+                                onPress={() =>
+                                    ActionSheet.show(
+                                        {
+                                            options: SIDES,
+                                            cancelButtonIndex: SIDES.length - 1,
+                                            title: content.frame.S || "Select Material"
+                                        },
+                                        buttonIndex => {
+                                            if (buttonIndex != SIDES.length - 1) {
+                                                content.frame.S = PermSub7[buttonIndex]
+                                                content.vent.S = PermSub7[buttonIndex]
+                                                content.accessPanel.S = PermSub7[buttonIndex]
+                                                content.gate.S = PermSub7[buttonIndex]
+                                                content.fence.S = PermSub7[buttonIndex]
+                                                content.playEquip.S = PermSub7[buttonIndex]
+                                                content.planterBox.S = PermSub7[buttonIndex]
+                                                content.equipment.S = PermSub7[buttonIndex]
+                                            } else {
+                                                content.frame.S = '';
+                                                content.vent.S = '';
+                                                content.accessPanel.S = '';
+                                                content.gate.S = '';
+                                                content.fence.S = '';
+                                                content.playEquip.S = '';
+                                                content.planterBox.S = '';
+                                                content.equipment.S = '';
+                                            }
+                                            this.setState({})
+                                        }
+                                    )}
+                            >
+                                <Text>{content.frame.S || "Side"}</Text>
+                            </Button>
+                        </Col>
+                        <Col>
+                            <Button
+                                onPress={() =>
+                                    ActionSheet.show(
+                                        {
+                                            options: PermSub7,
+                                            cancelButtonIndex: PermSub7.length - 1,
+                                            title: content.frame.M || "Select Material"
+                                        },
+                                        buttonIndex => {
+                                            if (buttonIndex != PermSub7.length - 1) {
+                                                content.frame.M = PermSub7[buttonIndex]
+                                                content.vent.M = PermSub7[buttonIndex]
+                                                content.accessPanel.M = PermSub7[buttonIndex]
+                                                content.gate.M = PermSub7[buttonIndex]
+                                                content.fence.M = PermSub7[buttonIndex]
+                                                content.playEquip.M = PermSub7[buttonIndex]
+                                                content.planterBox.M = PermSub7[buttonIndex]
+                                                content.equipment.M = PermSub7[buttonIndex]
+                                                this.setState({})
+                                            }
+                                        }
+                                    )}
+                            >
+                                <Text>{content.frame.M || "Material"}</Text>
+                            </Button>
+                        </Col>
+                    </Grid>
+                    <Text >{content.frame.I == true ? 'Intact' : 'Deteriorated'}</Text>
+                    <ListItem>
+                        <RkChoice rkType='posNeg' selected={content.frame.I} onChange={(e) => {
+                            content.frame.I = !content.frame.I
+                            this.setState({})
+                        }} />
+                    </ListItem>
+                    <Item>
+                        <Input keyboardType="numeric" placeholder="Reading" maxLength={4} value={content.frame.R} onChangeText={(text) => {
+                            let p = text.split('.').join('');
+                            content.frame.R = String((Math.round(p) / 10).toFixed(1));
+                            this.setState({})
+                        }} />
+                    </Item>
+                </Col>
+                <Col style={{ height: 200 }}>
+                    <Text>Equipment</Text>
+                    <Grid style={{ marginBottom: 20 }}>
+                        <Col>
+                            <Button
+                                onPress={() =>
+                                    ActionSheet.show(
+                                        {
+                                            options: SIDES,
+                                            cancelButtonIndex: SIDES.length - 1,
+                                            title: content.equipment.S || "Select Material"
+                                        },
+                                        buttonIndex => {
+                                            if (buttonIndex != SIDES.length - 1) {
+                                                content.equipment.S = SIDES[buttonIndex]
+                                            } else {
+                                                content.equipment.S = '';
+                                            }
+                                            this.setState({})
+                                        }
+                                    )}
+                            >
+                                <Text>{content.equipment.S || "Side"}</Text>
+                            </Button>
+                        </Col>
+                        <Col>
+                            <Button
+                                onPress={() =>
+                                    ActionSheet.show(
+                                        {
+                                            options: PermSub7,
+                                            cancelButtonIndex: PermSub7.length - 1,
+                                            title: "Material"
+                                        },
+                                        buttonIndex => {
+                                            if (buttonIndex != PermSub7.length - 1) {
+                                                content.equipment.M = PermSub7[buttonIndex]
+                                                this.setState({})
+                                            }
+                                        }
+                                    )}
+                            >
+                                <Text>{content.equipment.M || "Material"}</Text>
+                            </Button>
+                        </Col>
+                    </Grid>
+                    <Text >{content.equipment.I == true ? 'Intact' : 'Deteriorated'}</Text>
+                    <ListItem>
+                        <RkChoice rkType='posNeg' selected={content.equipment.I} onChange={(e) => {
+                            content.equipment.I = !content.equipment.I
+                            this.setState({})
+                        }} />
+                    </ListItem>
+                    <Item>
+                        <Input keyboardType="numeric" placeholder="Reading" maxLength={4} value={content.equipment.R} onChangeText={(text) => {
+                            let p = text.split('.').join('');
+                            content.equipment.R = String((Math.round(p) / 10).toFixed(1));
+                            this.setState({})
+                        }} />
+                    </Item>
+                </Col>
+            </Grid>
+            <Grid style={{ marginTop: 10 }}>
+                <Col style={{ height: 200 }}>
+                    <Text>Heater Vent</Text>
+                    <Grid style={{ marginBottom: 20 }}>
+                        <Col>
+                            <Button
+                                onPress={() =>
+                                    ActionSheet.show(
+                                        {
+                                            options: SIDES,
+                                            cancelButtonIndex: SIDES.length - 1,
+                                            title: content.vent.S || "Select Material"
+                                        },
+                                        buttonIndex => {
+                                            if (buttonIndex != SIDES.length - 1) {
+                                                content.vent.S = SIDES[buttonIndex]
+                                            } else {
+                                                content.vent.S = '';
+                                            }
+                                            this.setState({})
+                                        }
+                                    )}
+                            >
+                                <Text>{content.vent.S || "Side"}</Text>
+                            </Button>
+                        </Col>
+                        <Col>
+                            <Button
+                                onPress={() =>
+                                    ActionSheet.show(
+                                        {
+                                            options: PermSub7,
+                                            cancelButtonIndex: PermSub7.length - 1,
+                                            title: "Material"
+                                        },
+                                        buttonIndex => {
+                                            if (buttonIndex != PermSub7.length - 1) {
+                                                content.vent.M = PermSub7[buttonIndex]
+                                                this.setState({})
+                                            }
+                                        }
+                                    )}
+                            >
+                                <Text>{content.vent.M || "Material"}</Text>
+                            </Button>
+                        </Col>
+                    </Grid>
+                    <Text >{content.vent.I == true ? 'Intact' : 'Deteriorated'}</Text>
+                    <ListItem>
+                        <RkChoice rkType='posNeg' selected={content.vent.I} onChange={(e) => {
+                            content.vent.I = !content.vent.I
+                            this.setState({})
+                        }} />
+                    </ListItem>
+                    <Item>
+                        <Input keyboardType="numeric" placeholder="Reading" maxLength={4} value={content.vent.R} onChangeText={(text) => {
+                            let p = text.split('.').join('');
+                            content.vent.R = String((Math.round(p) / 10).toFixed(1));
+                            this.setState({})
+                        }} />
+                    </Item>
+                </Col>
+                <Col style={{ height: 200 }}>
+                    <Text>Access Panel/Frame</Text>
+                    <Grid style={{ marginBottom: 20 }}>
+                        <Col>
+                            <Button
+                                onPress={() =>
+                                    ActionSheet.show(
+                                        {
+                                            options: SIDES,
+                                            cancelButtonIndex: SIDES.length - 1,
+                                            title: content.accessPanel.S || "Select Material"
+                                        },
+                                        buttonIndex => {
+                                            if (buttonIndex != SIDES.length - 1) {
+                                                content.accessPanel.S = SIDES[buttonIndex]
+                                            } else {
+                                                content.accessPanel.S = '';
+                                            }
+                                            this.setState({})
+                                        }
+                                    )}
+                            >
+                                <Text>{content.accessPanel.S || "Side"}</Text>
+                            </Button>
+                        </Col>
+                        <Col>
+                            <Button
+                                onPress={() =>
+                                    ActionSheet.show(
+                                        {
+                                            options: PermSub7,
+                                            cancelButtonIndex: PermSub7.length - 1,
+                                            title: "Material"
+                                        },
+                                        buttonIndex => {
+                                            if (buttonIndex != PermSub7.length - 1) {
+                                                content.accessPanel.M = PermSub7[buttonIndex]
+                                                this.setState({})
+                                            }
+                                        }
+                                    )}
+                            >
+                                <Text>{content.accessPanel.M || "Material"}</Text>
+                            </Button>
+                        </Col>
+                    </Grid>
+                    <Text >{content.accessPanel.I == true ? 'Intact' : 'Deteriorated'}</Text>
+                    <ListItem>
+                        <RkChoice rkType='posNeg' selected={content.accessPanel.I} onChange={(e) => {
+                            content.accessPanel.I = !content.accessPanel.I
+                            this.setState({})
+                        }} />
+                    </ListItem>
+                    <Item>
+                        <Input keyboardType="numeric" placeholder="Reading" maxLength={4} value={content.accessPanel.R} onChangeText={(text) => {
+                            let p = text.split('.').join('');
+                            content.accessPanel.R = String((Math.round(p) / 10).toFixed(1));
+                            this.setState({})
+                        }} />
+                    </Item>
+                </Col>
+            </Grid>
+  
+            <Grid style={{ marginTop: 10 }}>
+                <Col style={{ height: 200 }}>
+                    <Text>Gate</Text>
+                    <Grid style={{ marginBottom: 20 }}>
+                        <Col>
+                            <Button
+                                onPress={() =>
+                                    ActionSheet.show(
+                                        {
+                                            options: SIDES,
+                                            cancelButtonIndex: SIDES.length - 1,
+                                            title: content.gate.S || "Select Material"
+                                        },
+                                        buttonIndex => {
+                                            if (buttonIndex != SIDES.length - 1) {
+                                                content.gate.S = SIDES[buttonIndex]
+                                            } else {
+                                                content.gate.S = '';
+                                            }
+                                            this.setState({})
+                                        }
+                                    )}
+                            >
+                                <Text>{content.gate.S || "Side"}</Text>
+                            </Button>
+                        </Col>
+                        <Col>
+  
+                            <Button
+                                onPress={() =>
+                                    ActionSheet.show(
+                                        {
+                                            options: PermSub7,
+                                            cancelButtonIndex: PermSub7.length - 1,
+                                            title: "Material"
+                                        },
+                                        buttonIndex => {
+                                            if (buttonIndex != PermSub7.length - 1) {
+                                                content.gate.M = PermSub7[buttonIndex]
+                                                this.setState({})
+                                            }
+                                        }
+                                    )}
+                            >
+                                <Text>{content.gate.M || "Material"}</Text>
+                            </Button>
+                        </Col>
+                    </Grid>
+                    <Text >{content.gate.I == true ? 'Intact' : 'Deteriorated'}</Text>
+                    <ListItem>
+                        <RkChoice rkType='posNeg' selected={content.gate.I} onChange={(e) => {
+                            content.gate.I = !content.gate.I
+                            this.setState({})
+                        }} />
+                    </ListItem>
+                    <Item>
+                        <Input keyboardType="numeric" placeholder="Reading" maxLength={4} value={content.gate.R} onChangeText={(text) => {
+                            let p = text.split('.').join('');
+                            content.gate.R = String((Math.round(p) / 10).toFixed(1));
+                            this.setState({})
+                        }} />
+                    </Item>
+                </Col>
+                <Col style={{ height: 200 }}>
+                    <Text>Fence</Text>
+                    <Grid style={{ marginBottom: 20 }}>
+                        <Col>
+                            <Button
+                                onPress={() =>
+                                    ActionSheet.show(
+                                        {
+                                            options: SIDES,
+                                            cancelButtonIndex: SIDES.length - 1,
+                                            title: content.fence.S || "Select Material"
+                                        },
+                                        buttonIndex => {
+                                            if (buttonIndex != SIDES.length - 1) {
+                                                content.fence.S = SIDES[buttonIndex]
+                                            } else {
+                                                content.fence.S = '';
+                                            }
+                                            this.setState({})
+                                        }
+                                    )}
+                            >
+                                <Text>{content.fence.S || "Side"}</Text>
+                            </Button>
+                        </Col>
+                        <Col>
+                            <Button
+                                onPress={() =>
+                                    ActionSheet.show(
+                                        {
+                                            options: PermSub7,
+                                            cancelButtonIndex: PermSub7.length - 1,
+                                            title: "Material"
+                                        },
+                                        buttonIndex => {
+                                            if (buttonIndex != PermSub7.length - 1) {
+                                                content.fence.M = PermSub7[buttonIndex]
+                                                this.setState({})
+                                            }
+                                        }
+                                    )}
+                            >
+                                <Text>{content.fence.M || "Material"}</Text>
+                            </Button>
+                        </Col>
+                    </Grid>
+                    <Text >{content.fence.I == true ? 'Intact' : 'Deteriorated'}</Text>
+                    <ListItem>
+                        <RkChoice rkType='posNeg' selected={content.fence.I} onChange={(e) => {
+                            content.fence.I = !content.fence.I
+                            this.setState({})
+                        }} />
+                    </ListItem>
+                    <Item>
+                        <Input keyboardType="numeric" placeholder="Reading" maxLength={4} value={content.fence.R} onChangeText={(text) => {
+                            let p = text.split('.').join('');
+                            content.fence.R = String((Math.round(p) / 10).toFixed(1));
+                            this.setState({})
+                        }} />
+                    </Item>
+                </Col>
+            </Grid>
+  
+            <Grid style={{ marginTop: 10 }}>
+                <Col style={{ height: 200 }}>
+                    <Text>Playground Equipment</Text>
+                    <Grid style={{ marginBottom: 20 }}>
+                        <Col>
+                            <Button
+                                onPress={() =>
+                                    ActionSheet.show(
+                                        {
+                                            options: SIDES,
+                                            cancelButtonIndex: SIDES.length - 1,
+                                            title: content.playEquip.S || "Select Material"
+                                        },
+                                        buttonIndex => {
+                                            if (buttonIndex != SIDES.length - 1) {
+                                                content.playEquip.S = SIDES[buttonIndex]
+                                            } else {
+                                                content.playEquip.S = '';
+                                            }
+                                            this.setState({})
+                                        }
+                                    )}
+                            >
+                                <Text>{content.playEquip.S || "Side"}</Text>
+                            </Button>
+                        </Col>
+                        <Col>
+                            <Button
+                                onPress={() =>
+                                    ActionSheet.show(
+                                        {
+                                            options: PermSub7,
+                                            cancelButtonIndex: PermSub7.length - 1,
+                                            title: "Material"
+                                        },
+                                        buttonIndex => {
+                                            if (buttonIndex != PermSub7.length - 1) {
+                                                content.playEquip.M = PermSub7[buttonIndex]
+                                                this.setState({})
+                                            }
+                                        }
+                                    )}
+                            >
+                                <Text>{content.playEquip.M || "Material"}</Text>
+                            </Button>
+                        </Col>
+                    </Grid>
+                    <Text >{content.playEquip.I == true ? 'Intact' : 'Deteriorated'}</Text>
+                    <ListItem>
+                        <RkChoice rkType='posNeg' selected={content.playEquip.I} onChange={(e) => {
+                            content.playEquip.I = !content.playEquip.I
+                            this.setState({})
+                        }} />
+                    </ListItem>
+                    <Item>
+                        <Input keyboardType="numeric" placeholder="Reading" maxLength={4} value={content.playEquip.R} onChangeText={(text) => {
+                            let p = text.split('.').join('');
+                            content.playEquip.R = String((Math.round(p) / 10).toFixed(1));
+                            this.setState({})
+                        }} />
+                    </Item>
+                </Col>
+                <Col style={{ height: 200 }}>
+                    <Text>Planter Box</Text>
+                    <Grid style={{ marginBottom: 20 }}>
+                        <Col>
+                            <Button
+                                onPress={() =>
+                                    ActionSheet.show(
+                                        {
+                                            options: SIDES,
+                                            cancelButtonIndex: SIDES.length - 1,
+                                            title: content.planterBox.S || "Select Material"
+                                        },
+                                        buttonIndex => {
+                                            if (buttonIndex != SIDES.length - 1) {
+                                                content.planterBox.S = SIDES[buttonIndex]
+                                            } else {
+                                                content.planterBox.S = '';
+                                            }
+                                            this.setState({})
+                                        }
+                                    )}
+                            >
+                                <Text>{content.planterBox.S || "Side"}</Text>
+                            </Button>
+                        </Col>
+                        <Col>
+                            <Button
+                                onPress={() =>
+                                    ActionSheet.show(
+                                        {
+                                            options: PermSub7,
+                                            cancelButtonIndex: PermSub7.length - 1,
+                                            title: "Material"
+                                        },
+                                        buttonIndex => {
+                                            if (buttonIndex != PermSub7.length - 1) {
+                                                content.planterBox.M = PermSub7[buttonIndex]
+                                                this.setState({})
+                                            }
+                                        }
+                                    )}
+                            >
+                                <Text>{content.planterBox.M || "Material"}</Text>
+                            </Button>
+                        </Col>
+                    </Grid>
+                    <Text >{content.planterBox.I == true ? 'Intact' : 'Deteriorated'}</Text>
+                    <ListItem>
+                        <RkChoice rkType='posNeg' selected={content.planterBox.I} onChange={(e) => {
+                            content.planterBox.I = !content.planterBox.I
+                            this.setState({})
+                        }} />
+                    </ListItem>
+                    <Item>
+                        <Input keyboardType="numeric" placeholder="Reading" maxLength={4} value={content.planterBox.R} onChangeText={(text) => {
+                            let p = text.split('.').join('');
+                            content.planterBox.R = String((Math.round(p) / 10).toFixed(1));
+                            this.setState({})
+                        }} />
+                    </Item>
+                </Col>
+            </Grid>
+            <Item stackedLabel>
+                <Label>Comments</Label>
+                <Input value={content.comments} onChangeText={(text) => { content.comments = text; this.setState({}) }} />
+            </Item>
+            {this.renderExteriorHtmlFooter(sheetId, content)}
+        </View>
+    );
+  }
+  }
 
 
 _renderIntSheet(content, sheetId) {
